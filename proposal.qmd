@@ -87,9 +87,9 @@ Future planning for businesses: By analyzing the temperature data, businesses ca
 
 ## Questions
 
-1. How have global and hemispheric temperature anomalies impacted agricultural productivity trends over the past decades, and what strategic adjustments should agribusinesses consider to mitigate the effects of climate change on crop yield variability and ensure food security?
+1. How can visualizations of the dataset illuminate trends in global and hemispheric temperature anomalies over time, aiding in the understanding of climate change's progression and its impacts on different regions of the Earth?
 
-2. Which visualization technique most effectively communicates the trends and patterns in climate anomalies over the years, and how can these visual insights inform strategic business decisions in sectors most affected by climate change, such as agriculture etc ?
+2. In what ways can comparing visualized data of seasonal temperature anomalies, as defined by meteorological seasons, provide insights into the shifting patterns of seasons and their potential effects on human livelihoods?
 
 
 ## Analysis plan

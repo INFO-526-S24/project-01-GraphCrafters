@@ -4,12 +4,16 @@ format: html
 editor: visual
 ---
 
-This project was developed by **\[Team Name\]** For [INFO 526 - Data Analysis and Visualization](https://datavizaz.org/) at the University of Arizona, taught by Dr. Greg Chism. The team is comprised of the following team members.
+This project was developed by **\[GraphCrafters\]** For [INFO 526 - Data Analysis and Visualization](https://datavizaz.org/) at the University of Arizona, taught by Dr. Greg Chism. The team is comprised of the following team members.
 
--   Team member 1: One sentence description of Team member 1 (e.g., year, major, etc.).
+-   Anjani Sowmya Bollapragada: Master's in Data Science
 
--   Team member 2: One sentence description of Team member 2 (e.g., year, major, etc.).
+-   Jeremiah Gaiser: 
 
--   Team member 3: One sentence description of Team member 3 (e.g., year, major, etc.).
+-   Mrunal Jadhav: Master's in Information Science
 
--   Team member 4: One sentence description of Team member 4 (e.g., year, major, etc.).
+-   Omid Zandi: PhD in Hydrology and Atmospheric Sciences
+
+-   Praveen Kumar Pappala: Master's in Data Science
+
+-   Surajit Pal: Master's in Information Science
