@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Project Title - Proposal title</title>
+<title>Project Title - Global Surface Temperature</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -94,6 +94,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
 
 </head>
 
@@ -154,6 +157,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#dataset" id="toc-dataset" class="nav-link active" data-scroll-target="#dataset">Dataset</a></li>
+  <li><a href="#why-this-dataset" id="toc-why-this-dataset" class="nav-link" data-scroll-target="#why-this-dataset">Why this Dataset?</a></li>
   <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions">Questions</a></li>
   <li><a href="#analysis-plan" id="toc-analysis-plan" class="nav-link" data-scroll-target="#analysis-plan">Analysis plan</a></li>
   </ul>
@@ -164,7 +168,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Proposal title</h1>
+<h1 class="title">Global Surface Temperature</h1>
 <p class="subtitle lead">Proposal</p>
 </div>
 
@@ -180,23 +184,471 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <section id="dataset" class="level2">
 <h2 class="anchored" data-anchor-id="dataset">Dataset</h2>
-<p>A brief description of your dataset including its provenance, dimensions, etc. as well as the reason why you chose this dataset.</p>
-<p>Make sure to load the data and use inline code for some of this information.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>global_temps <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-07-11/global_temps.csv'</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>nh_temps <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-07-11/nh_temps.csv'</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>sh_temps <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-07-11/sh_temps.csv'</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>zonann_temps <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-07-11/zonann_temps.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Introduction</strong>:</p>
+<p>The dataset is provided by NASA by combining land-surface, sea surface, air temperature anomalies. The values in the dataset are deviations from the corresponding 1951-1980 means, indicating how much warmer or colder it is than normal for a particular place and time, and the normal means the average over the 30-year period 1951-1980 for that place and time of year. More precisely, the base 1951-1980 mean is subtracted from the absolute temperature to get the anomaly.</p>
+<p>A brief description of the datasets is as below:</p>
+<p><strong>global_temps.csv</strong>: provides temperature anomalies of each month for every year. Seasonal and yearly anomaly averages are included as a convenience.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">variable</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">class</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Year</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Year</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jan</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Global Temperature Anomalies in January</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Feb</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Global Temperature Anomalies in February</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mar</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Global Temperature Anomalies in March</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Apr</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Global Temperature Anomalies in April</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">May</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Global Temperature Anomalies in May</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Jun</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Global Temperature Anomalies in June</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jul</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Global Temperature Anomalies in July</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Aug</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Global Temperature Anomalies in August</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sep</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Global Temperature Anomalies in September</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Oct</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Global Temperature Anomalies in October</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Nov</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Global Temperature Anomalies in November</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Dec</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Global Temperature Anomalies in December</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">J-D</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Global Temperature Anomalies in January-December</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">D-N</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Global Temperature Anomalies in Decemeber-November</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">DJF</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Global Temperature Anomalies in December-January-February</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MAM</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Global Temperature Anomalies in March-April-May</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">JJA</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Global Temperature Anomalies in June-July-August</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SON</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Global Temperature Anomalies in September-October-November</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p><strong>nh_temps.csv &amp; sh_temps.csv</strong>: contain the same data structures as global_temps, but are specific to northern and southern hemispheres, respectively.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">variable</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">class</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Year</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Year</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jan</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Northern Hemisphere Temperature Anomalies in January</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Feb</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Northern Hemisphere Temperature Anomalies in February</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mar</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Northern Hemisphere Temperature Anomalies in March</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Apr</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Northern Hemisphere Temperature Anomalies in April</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">May</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Northern Hemisphere Temperature Anomalies in May</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Jun</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Northern Hemisphere Temperature Anomalies in June</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jul</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Northern Hemisphere Temperature Anomalies in July</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Aug</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Northern Hemisphere Temperature Anomalies in August</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sep</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Northern Hemisphere Temperature Anomalies in September</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Oct</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Northern Hemisphere Temperature Anomalies in October</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Nov</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Northern Hemisphere Temperature Anomalies in November</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Dec</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Northern Hemisphere Temperature Anomalies in December</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">J-D</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Northern Hemisphere Temperature Anomalies in January-December</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">D-N</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Northern Hemisphere Temperature Anomalies in Decemeber-November</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">DJF</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Northern Hemisphere Temperature Anomalies in December-January-February</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MAM</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Northern Hemisphere Temperature Anomalies in March-April-May</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">JJA</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Northern Hemisphere Temperature Anomalies in June-July-August</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SON</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Northern Hemisphere Temperature Anomalies in September-October-November</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">variable</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">class</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Year</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Year</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jan</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Southern Hemisphere Temperature Anomalies in January</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Feb</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Southern Hemisphere Temperature Anomalies in February</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mar</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Southern Hemisphere Temperature Anomalies in March</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Apr</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Southern Hemisphere Temperature Anomalies in April</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">May</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Southern Hemisphere Temperature Anomalies in May</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Jun</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Southern Hemisphere Temperature Anomalies in June</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jul</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Southern Hemisphere Temperature Anomalies in July</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Aug</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Southern Hemisphere Temperature Anomalies in August</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sep</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Southern Hemisphere Temperature Anomalies in September</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Oct</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Southern Hemisphere Temperature Anomalies in October</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Nov</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Southern Hemisphere Temperature Anomalies in November</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Dec</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Southern Hemisphere Temperature Anomalies in December</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">J-D</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Southern Hemisphere Temperature Anomalies in January-December</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">D-N</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Southern Hemisphere Temperature Anomalies in Decemeber-November</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">DJF</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Southern Hemisphere Temperature Anomalies in December-January-February</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MAM</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Southern Hemisphere Temperature Anomalies in March-April-May</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">JJA</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Southern Hemisphere Temperature Anomalies in June-July-August</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SON</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Southern Hemisphere Temperature Anomalies in September-October-November</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p><strong>zonann_temps.csv</strong>: contains annual anomaly averages of multiple locales at varying granularity. This includes data at the global and hemispheric levels, as well as 11 unique latitudinal ranges between the Northern and Southern poles.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">variable</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">class</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Year</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Year</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Glob</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Global</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NHem</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Northern Hemisphere</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SHem</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Southern Hemisphere</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">24N-90N</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">24N-90N lattitude</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">24S-24N</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">24S-24N lattitude</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">90S-24S</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">90S-24S lattitude</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">64N-90N</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">64N-90N lattitude</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">44N-64N</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">44N-64N lattitude</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">24N-44N</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">24N-44N lattitude</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">EQU-24N</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">EQU-24N lattitude</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">24S-EQU</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">24S-EQU lattitude</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">44S-24S</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">44S-24S lattitude</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">64S-44S</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">64S-44S lattitude</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">90S-64S</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">90S-64S lattitude</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
+<section id="why-this-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="why-this-dataset">Why this Dataset?</h2>
+<p><strong>Analyzing climate datasets</strong>: These datasets can help us understand past and present climate trends, and potentially predict future patterns.</p>
+<p><strong>Comprehensive view</strong>: The datasets provide a comprehensive view of temperature changes from different perspectives - global, Northern Hemisphere, Southern Hemisphere, and zonal annual temperatures.</p>
+<p><strong>Impact on businesses</strong>: The weather is changing significantly in some places, which might necessitate changes in how businesses operate in those areas.</p>
+<p><strong>Future planning for businesses</strong>: By analyzing the temperature data, businesses can make plans for the future and decide what changes they might need to make to ensure their continued success.</p>
 </section>
 <section id="questions" class="level2">
 <h2 class="anchored" data-anchor-id="questions">Questions</h2>
-<p>The two questions you want to answer.</p>
+<ol type="1">
+<li><p>How can visualizations of the dataset illuminate trends in global and hemispheric temperature anomalies over time, aiding in the understanding of climate change’s progression and its impacts on different regions of the Earth?</p></li>
+<li><p>In what ways can comparing visualized data of seasonal temperature anomalies, as defined by meteorological seasons, provide insights into the shifting patterns of seasons and their potential effects on human livelihoods?</p></li>
+</ol>
 </section>
 <section id="analysis-plan" class="level2">
 <h2 class="anchored" data-anchor-id="analysis-plan">Analysis plan</h2>
-<ul>
-<li>A plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).</li>
-</ul>
+<p><strong>Global Temperature Trends</strong>: Plot global temperature anomalies over time using a line graph. Analyze the trend to understand long-term changes and their impact on agriculture.</p>
+<p><strong>Zonal Temperature Comparisons</strong>: Use facet graphs to compare temperature anomalies across different zones. Analyze mean deviations to understand variations within and between zones.</p>
+<p><strong>Latitude-based Temperature Anomalies</strong>: Create a heat map to visualize anomalies across latitude ranges. Analyze spatial patterns to identify regions most affected by climate change.</p>
+<p><strong>Global Temperature Visualization</strong>: Utilize ggmap to overlay temperature data onto a global map. Incorporate geographic features to contextualize temperature variations.</p>
+<p><strong>Hemispheric Comparisons</strong>: Construct side-by-side box plots to compare hemispheric anomalies. Analyze differences in temperature patterns between hemispheres.</p>
+<p><strong>Analysis and Interpretation</strong>: Evaluate trends and patterns to identify regions experiencing significant anomalies. Discuss strategic adjustments for agribusinesses to mitigate climate change effects on agriculture. Consider additional factors such as precipitation and technology advancements.</p>
 
 
 </section>
