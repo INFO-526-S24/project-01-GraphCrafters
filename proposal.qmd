@@ -89,7 +89,7 @@ zonann_temps_desc |>
 
 ## Analysis plan
 
-**Global Temperature Trends**: Plot global temperature anomalies over time using a line graph. Analyze the trend to understand long-term changes and their impact on agriculture.
+**Global Temperature Trends**: Plot global temperature anomalies over time using a line graph. Analyze the trend to understand long-term changes.
 
 **Zonal Temperature Comparisons**: Use facet graphs to compare temperature anomalies across different zones. Analyze mean deviations to understand variations within and between zones.
 
@@ -99,4 +99,4 @@ zonann_temps_desc |>
 
 **Hemispheric Comparisons**: Construct side-by-side box plots to compare hemispheric anomalies. Analyze differences in temperature patterns between hemispheres.
 
-**Analysis and Interpretation**: Evaluate trends and patterns to identify regions experiencing significant anomalies. Discuss strategic adjustments for agribusinesses to mitigate climate change effects on agriculture. Consider additional factors such as precipitation and technology advancements.
+**Analysis and Interpretation**: Evaluate trends and patterns to identify regions experiencing significant anomalies.
