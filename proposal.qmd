@@ -27,7 +27,7 @@ zonann_temps <- readr::read_csv('https://raw.githubusercontent.com/rfordatascien
 
 ```
 
-Introduction: 
+**Introduction**:
 
 The dataset is provided by NASA by combining land-surface, sea surface, air temperature anomalies. The values in the dataset are deviations from the corresponding 1951-1980 means, indicating how much warmer or colder it is than normal for a particular place and time, and the normal means the average over the 30-year period 1951-1980 for that place and time of year. More precisely, the base 1951-1980 mean is subtracted from the absolute temperature to get the anomaly.
 
@@ -41,7 +41,7 @@ sh_temps_desc <- read.csv("data/sh_temps_desc.csv")
 zonann_temps_desc <- read.csv("data/zonann_temps_desc.csv")
 ```
 
-global_temps.csv: 
+**global_temps.csv**: provides temperature anomalies of each month for every year. Seasonal and yearly anomaly averages are included as a convenience.
 
 ```{r global_desc, echo=FALSE, message=FALSE}
 global_temps_desc |>
@@ -49,7 +49,7 @@ global_temps_desc |>
   kableExtra::kable_styling()
 ```
 
-nh_temps.csv: 
+**nh_temps.csv & sh_temps.csv**: contain the same data structures as global_temps, but are specific to northern and southern hemispheres, respectively.
 
 ```{r nh_desc, echo=FALSE, message=FALSE}
 nh_temps_desc |>
@@ -57,15 +57,13 @@ nh_temps_desc |>
   kableExtra::kable_styling()
 ```
 
-sh_temps.csv: 
-
 ```{r sh_desc, echo=FALSE, message=FALSE}
 sh_temps_desc |>
   kableExtra::kable() |>
   kableExtra::kable_styling()
 ```
 
-zonann_temps.csv: 
+**zonann_temps.csv**: contains annual anomaly averages of multiple locales at varying granularity. This includes data at the global and hemispheric levels, as well as 11 unique latitudinal ranges between the Northern and Southern poles.
 
 ```{r zonann_desc, echo=FALSE, message=FALSE}
 zonann_temps_desc |>
@@ -73,47 +71,32 @@ zonann_temps_desc |>
   kableExtra::kable_styling()
 ```
 
-
 ## Why this Dataset?
 
-Analyzing climate datasets: These datasets can help us understand past and present climate trends, and potentially predict future patterns.
+**Analyzing climate datasets**: These datasets can help us understand past and present climate trends, and potentially predict future patterns.
 
-Comprehensive view: The datasets provide a comprehensive view of temperature changes from different perspectives - global, Northern Hemisphere, Southern Hemisphere, and zonal annual temperatures.
+**Comprehensive view**: The datasets provide a comprehensive view of temperature changes from different perspectives - global, Northern Hemisphere, Southern Hemisphere, and zonal annual temperatures.
 
-Impact on businesses: The weather is changing significantly in some places, which might necessitate changes in how businesses operate in those areas.
+**Impact on businesses**: The weather is changing significantly in some places, which might necessitate changes in how businesses operate in those areas.
 
-Future planning for businesses: By analyzing the temperature data, businesses can make plans for the future and decide what changes they might need to make to ensure their continued success.
-
+**Future planning for businesses**: By analyzing the temperature data, businesses can make plans for the future and decide what changes they might need to make to ensure their continued success.
 
 ## Questions
 
-1. How can visualizations of the dataset illuminate trends in global and hemispheric temperature anomalies over time, aiding in the understanding of climate change's progression and its impacts on different regions of the Earth?
+1.  How can visualizations of the dataset illuminate trends in global and hemispheric temperature anomalies over time, aiding in the understanding of climate change's progression and its impacts on different regions of the Earth?
 
-2. In what ways can comparing visualized data of seasonal temperature anomalies, as defined by meteorological seasons, provide insights into the shifting patterns of seasons and their potential effects on human livelihoods?
-
+2.  In what ways can comparing visualized data of seasonal temperature anomalies, as defined by meteorological seasons, provide insights into the shifting patterns of seasons and their potential effects on human livelihoods?
 
 ## Analysis plan
 
-Global Temperature Trends:
-Plot global temperature anomalies over time using a line graph.
-Analyze the trend to understand long-term changes and their impact on agriculture.
+**Global Temperature Trends**: Plot global temperature anomalies over time using a line graph. Analyze the trend to understand long-term changes and their impact on agriculture.
 
-Zonal Temperature Comparisons:
-Use facet graphs to compare temperature anomalies across different zones.
-Analyze mean deviations to understand variations within and between zones.
+**Zonal Temperature Comparisons**: Use facet graphs to compare temperature anomalies across different zones. Analyze mean deviations to understand variations within and between zones.
 
-Latitude-based Temperature Anomalies:
-Create a heat map to visualize anomalies across latitude ranges.
-Analyze spatial patterns to identify regions most affected by climate change.
+**Latitude-based Temperature Anomalies**: Create a heat map to visualize anomalies across latitude ranges. Analyze spatial patterns to identify regions most affected by climate change.
 
-Global Temperature Visualization:
-Utilize ggmap to overlay temperature data onto a global map.
-Incorporate geographic features to contextualize temperature variations.
+**Global Temperature Visualization**: Utilize ggmap to overlay temperature data onto a global map. Incorporate geographic features to contextualize temperature variations.
 
-Hemispheric Comparisons:
-Construct side-by-side box plots to compare hemispheric anomalies.
-Analyze differences in temperature patterns between hemispheres.
+**Hemispheric Comparisons**: Construct side-by-side box plots to compare hemispheric anomalies. Analyze differences in temperature patterns between hemispheres.
 
-Analysis and Interpretation:
-Evaluate trends and patterns to identify regions experiencing significant anomalies.
-Discuss strategic adjustments for agribusinesses to mitigate climate change effects on agriculture. Consider additional factors such as precipitation and technology advancements.
+**Analysis and Interpretation**: Evaluate trends and patterns to identify regions experiencing significant anomalies. Discuss strategic adjustments for agribusinesses to mitigate climate change effects on agriculture. Consider additional factors such as precipitation and technology advancements.

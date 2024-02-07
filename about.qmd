@@ -8,7 +8,7 @@ This project was developed by **\[GraphCrafters\]** For [INFO 526 - Data Analysi
 
 -   Anjani Sowmya Bollapragada: Master's in Data Science
 
--   Jeremiah Gaiser: 
+-   Jeremiah Gaiser: PhD in Information
 
 -   Mrunal Jadhav: Master's in Information Science
 
