@@ -1,0 +1,20 @@
+variable,class,description
+Year,double,Year
+Jan,double,Southern Hemisphere Temperature Anomalies in January
+Feb,double,Southern Hemisphere Temperature Anomalies in February
+Mar,double,Southern Hemisphere Temperature Anomalies in March
+Apr,double,Southern Hemisphere Temperature Anomalies in April
+May,double,Southern Hemisphere Temperature Anomalies in May
+Jun,double,Southern Hemisphere Temperature Anomalies in June
+Jul,double,Southern Hemisphere Temperature Anomalies in July
+Aug,double,Southern Hemisphere Temperature Anomalies in August
+Sep,double,Southern Hemisphere Temperature Anomalies in September
+Oct,double,Southern Hemisphere Temperature Anomalies in October
+Nov,double,Southern Hemisphere Temperature Anomalies in November
+Dec,double,Southern Hemisphere Temperature Anomalies in December
+J-D,double,Southern Hemisphere Temperature Anomalies in January-December
+D-N,double,Southern Hemisphere Temperature Anomalies in Decemeber-November
+DJF,double,Southern Hemisphere Temperature Anomalies in December-January-February
+MAM,double,Southern Hemisphere Temperature Anomalies in March-April-May
+JJA,double,Southern Hemisphere Temperature Anomalies in June-July-August
+SON,double,Southern Hemisphere Temperature Anomalies in September-October-November

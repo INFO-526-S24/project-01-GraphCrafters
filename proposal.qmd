@@ -1,14 +1,17 @@
 ---
-title: "Proposal title"
+title: "Global Surface Temperature"
 subtitle: "Proposal"
 format: html
 editor: visual
 ---
 
-```{r}
+```{r, echo=FALSE}
 #| label: load-pkgs
 #| message: false
 library(tidyverse)
+library(scales)
+library(pander)
+library(here)
 ```
 
 ## Dataset
@@ -16,16 +19,101 @@ library(tidyverse)
 ```{r}
 #| label: load-dataset
 #| message: false
+
+global_temps <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-07-11/global_temps.csv')
+nh_temps <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-07-11/nh_temps.csv')
+sh_temps <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-07-11/sh_temps.csv')
+zonann_temps <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-07-11/zonann_temps.csv')
+
 ```
 
-A brief description of your dataset including its provenance, dimensions, etc. as well as the reason why you chose this dataset.
+Introduction: 
 
-Make sure to load the data and use inline code for some of this information.
+The dataset is provided by NASA by combining land-surface, sea surface, air temperature anomalies. The values in the dataset are deviations from the corresponding 1951-1980 means, indicating how much warmer or colder it is than normal for a particular place and time, and the normal means the average over the 30-year period 1951-1980 for that place and time of year. More precisely, the base 1951-1980 mean is subtracted from the absolute temperature to get the anomaly.
+
+A brief description of the datasets is as below:
+
+```{r desc, echo=FALSE, message=FALSE}
+
+global_temps_desc <- read.csv("data/global_temps_desc.csv")
+nh_temps_desc <- read.csv("data/nh_temps_desc.csv")
+sh_temps_desc <- read.csv("data/sh_temps_desc.csv")
+zonann_temps_desc <- read.csv("data/zonann_temps_desc.csv")
+```
+
+global_temps.csv: 
+
+```{r global_desc, echo=FALSE, message=FALSE}
+global_temps_desc |>
+  kableExtra::kable() |>
+  kableExtra::kable_styling()
+```
+
+nh_temps.csv: 
+
+```{r nh_desc, echo=FALSE, message=FALSE}
+nh_temps_desc |>
+  kableExtra::kable() |>
+  kableExtra::kable_styling()
+```
+
+sh_temps.csv: 
+
+```{r sh_desc, echo=FALSE, message=FALSE}
+sh_temps_desc |>
+  kableExtra::kable() |>
+  kableExtra::kable_styling()
+```
+
+zonann_temps.csv: 
+
+```{r zonann_desc, echo=FALSE, message=FALSE}
+zonann_temps_desc |>
+  kableExtra::kable() |>
+  kableExtra::kable_styling()
+```
+
+
+## Why this Dataset?
+
+Analyzing climate datasets: These datasets can help us understand past and present climate trends, and potentially predict future patterns.
+
+Comprehensive view: The datasets provide a comprehensive view of temperature changes from different perspectives - global, Northern Hemisphere, Southern Hemisphere, and zonal annual temperatures.
+
+Impact on businesses: The weather is changing significantly in some places, which might necessitate changes in how businesses operate in those areas.
+
+Future planning for businesses: By analyzing the temperature data, businesses can make plans for the future and decide what changes they might need to make to ensure their continued success.
+
 
 ## Questions
 
-The two questions you want to answer.
+1. How have global and hemispheric temperature anomalies impacted agricultural productivity trends over the past decades, and what strategic adjustments should agribusinesses consider to mitigate the effects of climate change on crop yield variability and ensure food security?
+
+2. Which visualization technique most effectively communicates the trends and patterns in climate anomalies over the years, and how can these visual insights inform strategic business decisions in sectors most affected by climate change, such as agriculture etc ?
+
 
 ## Analysis plan
 
--   A plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).
+Global Temperature Trends:
+Plot global temperature anomalies over time using a line graph.
+Analyze the trend to understand long-term changes and their impact on agriculture.
+
+Zonal Temperature Comparisons:
+Use facet graphs to compare temperature anomalies across different zones.
+Analyze mean deviations to understand variations within and between zones.
+
+Latitude-based Temperature Anomalies:
+Create a heat map to visualize anomalies across latitude ranges.
+Analyze spatial patterns to identify regions most affected by climate change.
+
+Global Temperature Visualization:
+Utilize ggmap to overlay temperature data onto a global map.
+Incorporate geographic features to contextualize temperature variations.
+
+Hemispheric Comparisons:
+Construct side-by-side box plots to compare hemispheric anomalies.
+Analyze differences in temperature patterns between hemispheres.
+
+Analysis and Interpretation:
+Evaluate trends and patterns to identify regions experiencing significant anomalies.
+Discuss strategic adjustments for agribusinesses to mitigate climate change effects on agriculture. Consider additional factors such as precipitation and technology advancements.

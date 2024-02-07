@@ -1,0 +1,20 @@
+﻿variable,class,description
+Year,double,Year
+Jan,double,Global Temperature Anomalies in January
+Feb,double,Global Temperature Anomalies in February
+Mar,double,Global Temperature Anomalies in March
+Apr,double,Global Temperature Anomalies in April
+May,double,Global Temperature Anomalies in May
+Jun,double,Global Temperature Anomalies in June
+Jul,double,Global Temperature Anomalies in July
+Aug,double,Global Temperature Anomalies in August
+Sep,double,Global Temperature Anomalies in September
+Oct,double,Global Temperature Anomalies in October
+Nov,double,Global Temperature Anomalies in November
+Dec,double,Global Temperature Anomalies in December
+J-D,double,Global Temperature Anomalies in January-December
+D-N,double,Global Temperature Anomalies in Decemeber-November
+DJF,double,Global Temperature Anomalies in December-January-February
+MAM,double,Global Temperature Anomalies in March-April-May
+JJA,double,Global Temperature Anomalies in June-July-August
+SON,double,Global Temperature Anomalies in September-October-November

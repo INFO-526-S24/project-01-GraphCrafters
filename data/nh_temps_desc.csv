@@ -1,0 +1,20 @@
+variable,class,description
+Year,double,Year
+Jan,double,Northern Hemisphere Temperature Anomalies in  January
+Feb,double,Northern Hemisphere Temperature Anomalies in  February
+Mar,double,Northern Hemisphere Temperature Anomalies in  March
+Apr,double,Northern Hemisphere Temperature Anomalies in  April
+May,double,Northern Hemisphere Temperature Anomalies in  May
+Jun,double,Northern Hemisphere Temperature Anomalies in  June
+Jul,double,Northern Hemisphere Temperature Anomalies in  July
+Aug,double,Northern Hemisphere Temperature Anomalies in  August
+Sep,double,Northern Hemisphere Temperature Anomalies in  September
+Oct,double,Northern Hemisphere Temperature Anomalies in  October
+Nov,double,Northern Hemisphere Temperature Anomalies in  November
+Dec,double,Northern Hemisphere Temperature Anomalies in  December
+J-D,double,Northern Hemisphere Temperature Anomalies in  January-December
+D-N,double,Northern Hemisphere Temperature Anomalies in  Decemeber-November
+DJF,double,Northern Hemisphere Temperature Anomalies in  December-January-February
+MAM,double,Northern Hemisphere Temperature Anomalies in  March-April-May
+JJA,double,Northern Hemisphere Temperature Anomalies in  June-July-August
+SON,double,Northern Hemisphere Temperature Anomalies in  September-October-November
