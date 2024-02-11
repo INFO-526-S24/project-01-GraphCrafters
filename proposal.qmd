@@ -89,15 +89,34 @@ zonann_temps_desc |>
 
 ## Analysis plan
 
-**Global Temperature Trends**: Plot global temperature anomalies over time using a line graph. Analyze the trend to understand long-term changes.
+**Referring to Question 1**: 
 
-**Zonal Temperature Comparisons**: Use facet graphs to compare temperature anomalies across different zones. Analyze mean deviations to understand variations within and between zones.
+**Global Temperature Trends**: Plot global temperature anomalies over time using a line graph. Analyze the trend to understand long-term changes. 
 
-**Latitude-based Temperature Anomalies**: Create a heat map to visualize anomalies across latitude ranges. Analyze spatial patterns to identify regions most affected by climate change.
+csv file to be used: global_temps.csv
+
+**Zonal Temperature Comparisons**: Use facet graphs (example: bar, line, scatter) to compare temperature anomalies across different zones. Analyze mean deviations to understand variations within and between zones.
+
+csv file to be used: zonann_temps.csv
+
+**Referring to Question 2**: 
+
+**Latitude-based Temperature Anomalies**: Create a heat map to visualize anomalies across latitude ranges and seasonal changes. Analyze spatial patterns to identify regions most affected by climate change.
+
+csv file to be used: zonann_temps.csv
 
 **Global Temperature Visualization**: Utilize ggmap to overlay temperature data onto a global map. Incorporate geographic features to contextualize temperature variations.
 
+csv file to be used: zonann_temps.csv, global_temps.csv
+
 **Hemispheric Comparisons**: Construct side-by-side box plots to compare hemispheric anomalies. Analyze differences in temperature patterns between hemispheres.
 
-**Analysis and Interpretation**: Evaluate trends and patterns to identify regions experiencing significant anomalies. Discuss strategic adjustments to mitigate climate changes. Consider additional factors such as precipitation and technology advancements.
+csv file to be used: nh_temps.csv and sh_temps.csv
+
+Note: For the questions where multiple csv files are used, the 'year' column will be used to join the columns (using inner_join()) and change the names (if required) and then work on the plots.
+
+
+**Analysis and Interpretation**: Evaluate trends and patterns to identify regions experiencing significant anomalies. Upon analyzing the variations in different visualizations, we would be able to infer the effect of temperature anomalies on human livelihood for example in agriculture, tourism, health and global warming and discuss strategic adjustments to mitigate climate changes and work on technology advancements to improve in the future.
+
+
 
