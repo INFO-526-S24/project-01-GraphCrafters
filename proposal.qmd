@@ -89,9 +89,9 @@ zonann_temps_desc |>
 
 ## Analysis plan
 
-**Referring to Question 1**: 
+**Referring to Question 1**:
 
-**Global Temperature Trends**: Plot global temperature anomalies over time using a line graph. Analyze the trend to understand long-term changes. 
+**Global Temperature Trends**: Plot global temperature anomalies over time using a line graph. Analyze the trend to understand long-term changes.
 
 csv file to be used: global_temps.csv
 
@@ -99,7 +99,7 @@ csv file to be used: global_temps.csv
 
 csv file to be used: zonann_temps.csv
 
-**Referring to Question 2**: 
+**Referring to Question 2**:
 
 **Latitude-based Temperature Anomalies**: Create a heat map to visualize anomalies across latitude ranges and seasonal changes. Analyze spatial patterns to identify regions most affected by climate change.
 
@@ -115,8 +115,4 @@ csv file to be used: nh_temps.csv and sh_temps.csv
 
 Note: For the questions where multiple csv files are used, the 'year' column will be used to join the columns (using inner_join()) and change the names (if required) and then work on the plots.
 
-
 **Analysis and Interpretation**: Evaluate trends and patterns to identify regions experiencing significant anomalies. Upon analyzing the variations in different visualizations, we would be able to infer the effect of temperature anomalies on human livelihood for example in agriculture, tourism, health and global warming and discuss strategic adjustments to mitigate climate changes and work on technology advancements to improve in the future.
-
-
-
