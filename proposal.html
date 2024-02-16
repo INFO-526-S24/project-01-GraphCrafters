@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.540">
+<meta name="generator" content="quarto-1.4.549">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -166,6 +166,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#why-this-dataset" id="toc-why-this-dataset" class="nav-link" data-scroll-target="#why-this-dataset">Why this Dataset?</a></li>
   <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions">Questions</a></li>
   <li><a href="#analysis-plan" id="toc-analysis-plan" class="nav-link" data-scroll-target="#analysis-plan">Analysis plan</a></li>
+  <li><a href="#timeline" id="toc-timeline" class="nav-link" data-scroll-target="#timeline">Timeline</a></li>
   </ul>
 </nav>
     </div>
@@ -645,7 +646,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="questions" class="level2">
 <h2 class="anchored" data-anchor-id="questions">Questions</h2>
 <ol type="1">
-<li><p>How can visualizations of the dataset illuminate trends in global and hemispheric temperature anomalies over time, aiding in the understanding of climate change’s progression and its impacts on different regions of the Earth?</p></li>
+<li><p>How can visualizations of the dataset illuminate trends in global and hemispheric annual temperature anomalies over time, aiding in the understanding of climate change’s progression and its impacts on different regions of the Earth?</p></li>
 <li><p>In what ways can comparing visualized data of seasonal temperature anomalies, as defined by meteorological seasons, provide insights into the shifting patterns of seasons and their potential effects on human livelihoods?</p></li>
 </ol>
 </section>
@@ -653,18 +654,63 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="analysis-plan">Analysis plan</h2>
 <p><strong>Referring to Question 1</strong>:</p>
 <p><strong>Global Temperature Trends</strong>: Plot global temperature anomalies over time using a line graph. Analyze the trend to understand long-term changes.</p>
-<p>csv file to be used: global_temps.csv</p>
 <p><strong>Zonal Temperature Comparisons</strong>: Use facet graphs (example: bar, line, scatter) to compare temperature anomalies across different zones. Analyze mean deviations to understand variations within and between zones.</p>
-<p>csv file to be used: zonann_temps.csv</p>
+<p><strong>Detailed Plan</strong>:</p>
+<ol type="1">
+<li>Use the zonnan_temps.csv dataset to answer questions.</li>
+<li>Transform data from wide format to long format:
+<ul>
+<li>Create a new column called “zones”.</li>
+<li>Merge all eight variables related to zones (EQ-24N, 24N-44N, 44N-64N, 64N-90N, EQ-24S, 24S-44S, 44S-64S, 64S-90S) into the “zones” column.</li>
+</ul></li>
+<li>Resulting data frame will have three columns:
+<ul>
+<li>Year</li>
+<li>Zone</li>
+<li>Anomalies.</li>
+</ul></li>
+</ol>
 <p><strong>Referring to Question 2</strong>:</p>
 <p><strong>Latitude-based Temperature Anomalies</strong>: Create a heat map to visualize anomalies across latitude ranges and seasonal changes. Analyze spatial patterns to identify regions most affected by climate change.</p>
-<p>csv file to be used: zonann_temps.csv</p>
 <p><strong>Global Temperature Visualization</strong>: Utilize ggmap to overlay temperature data onto a global map. Incorporate geographic features to contextualize temperature variations.</p>
-<p>csv file to be used: zonann_temps.csv, global_temps.csv</p>
 <p><strong>Hemispheric Comparisons</strong>: Construct side-by-side box plots to compare hemispheric anomalies. Analyze differences in temperature patterns between hemispheres.</p>
-<p>csv file to be used: nh_temps.csv and sh_temps.csv</p>
-<p>Note: For the questions where multiple csv files are used, the ‘year’ column will be used to join the columns (using inner_join()) and change the names (if required) and then work on the plots.</p>
+<p><strong>Detailed Plan</strong>:</p>
+<ol type="1">
+<li>Obtain nh_temps.csv and sh_temps.csv datasets.</li>
+<li>Convert each dataset to long format:
+<ul>
+<li>Create a new column for each month (Jan, Feb, …, Nov, Dec).</li>
+<li>Include a column for hemispheres (NH and SH).</li>
+<li>Add a column for temperature anomalies.</li>
+</ul></li>
+<li>Merge the two data frames obtained from the CSV files vertically to create one comprehensive data frame.</li>
+<li>For seasonal analysis:
+<ul>
+<li>Define variables for the four seasons: DJF (Winter), MAM (Spring), JJA (Summer), and SON (Fall) in the northern hemisphere.</li>
+<li>Create a season column and merge the four seasons into it.</li>
+</ul></li>
+<li>Finally, the comprehensive data frame should have four columns:
+<ul>
+<li>Year</li>
+<li>Season</li>
+<li>Hemisphere (Northern or Southern)</li>
+<li>Temperature anomalies.</li>
+</ul></li>
+</ol>
 <p><strong>Analysis and Interpretation</strong>: Evaluate trends and patterns to identify regions experiencing significant anomalies. Upon analyzing the variations in different visualizations, we would be able to infer the effect of temperature anomalies on human livelihood for example in agriculture, tourism, health and global warming and discuss strategic adjustments to mitigate climate changes and work on technology advancements to improve in the future.</p>
+</section>
+<section id="timeline" class="level2">
+<h2 class="anchored" data-anchor-id="timeline">Timeline</h2>
+<p><strong>Week 1 (18th - 24th February)</strong>:</p>
+<p>1. Perform initial data cleaning and preprocessing.</p>
+<p>2. Conduct exploratory data analysis (EDA) on all the datasets.</p>
+<p><strong>Week 2 (25th February - 3rd March)</strong>:</p>
+<p>1. Start building the visualizations (according to the proposal) to predict future temperature anomalies.</p>
+<p>2. Evaluate the plots using appropriate metrics.</p>
+<p><strong>Week 3 (4th - 9th March)</strong>:</p>
+<p>1. Continue with building the plots and parameter tuning.</p>
+<p>2. Prepare a detailed report of the analysis.</p>
+<p>3. Finalize the report and prepare for presentation.</p>
 
 
 </section>
@@ -831,7 +877,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      return note.innerHTML;
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
