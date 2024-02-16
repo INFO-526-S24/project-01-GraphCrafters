@@ -83,7 +83,7 @@ zonann_temps_desc |>
 
 ## Questions
 
-1.  How can visualizations of the dataset illuminate trends in global and hemispheric temperature anomalies over time, aiding in the understanding of climate change's progression and its impacts on different regions of the Earth?
+1.  How can visualizations of the dataset illuminate trends in global and hemispheric annual temperature anomalies over time, aiding in the understanding of climate change's progression and its impacts on different regions of the Earth?
 
 2.  In what ways can comparing visualized data of seasonal temperature anomalies, as defined by meteorological seasons, provide insights into the shifting patterns of seasons and their potential effects on human livelihoods?
 
@@ -93,26 +93,64 @@ zonann_temps_desc |>
 
 **Global Temperature Trends**: Plot global temperature anomalies over time using a line graph. Analyze the trend to understand long-term changes.
 
-csv file to be used: global_temps.csv
-
 **Zonal Temperature Comparisons**: Use facet graphs (example: bar, line, scatter) to compare temperature anomalies across different zones. Analyze mean deviations to understand variations within and between zones.
 
-csv file to be used: zonann_temps.csv
+**Detailed Plan**:
+
+1.  Use the zonnan_temps.csv dataset to answer questions.
+2.  Transform data from wide format to long format:
+    -   Create a new column called "zones".
+    -   Merge all eight variables related to zones (EQ-24N, 24N-44N, 44N-64N, 64N-90N, EQ-24S, 24S-44S, 44S-64S, 64S-90S) into the "zones" column.
+3.  Resulting data frame will have three columns:
+    -   Year
+    -   Zone
+    -   Anomalies.
 
 **Referring to Question 2**:
 
 **Latitude-based Temperature Anomalies**: Create a heat map to visualize anomalies across latitude ranges and seasonal changes. Analyze spatial patterns to identify regions most affected by climate change.
 
-csv file to be used: zonann_temps.csv
-
 **Global Temperature Visualization**: Utilize ggmap to overlay temperature data onto a global map. Incorporate geographic features to contextualize temperature variations.
-
-csv file to be used: zonann_temps.csv, global_temps.csv
 
 **Hemispheric Comparisons**: Construct side-by-side box plots to compare hemispheric anomalies. Analyze differences in temperature patterns between hemispheres.
 
-csv file to be used: nh_temps.csv and sh_temps.csv
+**Detailed Plan**:
 
-Note: For the questions where multiple csv files are used, the 'year' column will be used to join the columns (using inner_join()) and change the names (if required) and then work on the plots.
+1.  Obtain nh_temps.csv and sh_temps.csv datasets.
+2.  Convert each dataset to long format:
+    -   Create a new column for each month (Jan, Feb, ..., Nov, Dec).
+    -   Include a column for hemispheres (NH and SH).
+    -   Add a column for temperature anomalies.
+3.  Merge the two data frames obtained from the CSV files vertically to create one comprehensive data frame.
+4.  For seasonal analysis:
+    -   Define variables for the four seasons: DJF (Winter), MAM (Spring), JJA (Summer), and SON (Fall) in the northern hemisphere.
+    -   Create a season column and merge the four seasons into it.
+5.  Finally, the comprehensive data frame should have four columns:
+    -   Year
+    -   Season
+    -   Hemisphere (Northern or Southern)
+    -   Temperature anomalies.
 
 **Analysis and Interpretation**: Evaluate trends and patterns to identify regions experiencing significant anomalies. Upon analyzing the variations in different visualizations, we would be able to infer the effect of temperature anomalies on human livelihood for example in agriculture, tourism, health and global warming and discuss strategic adjustments to mitigate climate changes and work on technology advancements to improve in the future.
+
+## Timeline
+
+**Week 1 (18th - 24th February)**:
+
+1\. Perform initial data cleaning and preprocessing.
+
+2\. Conduct exploratory data analysis (EDA) on all the datasets.
+
+**Week 2 (25th February - 3rd March)**:
+
+1\. Start building the visualizations (according to the proposal) to predict future temperature anomalies.
+
+2\. Evaluate the plots using appropriate metrics.
+
+**Week 3 (4th - 9th March)**:
+
+1\. Continue with building the plots and parameter tuning.
+
+2\. Prepare a detailed report of the analysis.
+
+3\. Finalize the report and prepare for presentation.
