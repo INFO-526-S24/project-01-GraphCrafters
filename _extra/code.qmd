@@ -7,20 +7,488 @@
 suppressWarnings(library(tidyverse))
 library(knitr)
 library(lubridate)
+# Load packages here
+pacman::p_load(tidymodels,
+               tidyverse,
+               scales,
+               here,
+               pander,
+               ggplot2,
+               ggpubr,
+               dplyr,
+               ggmap,
+               ggrepel)
 
 ```
 
+```{r}
+#| label: setup
+
+# Plot theme
+ggplot2::theme_set(ggplot2::theme_minimal(base_size = 11))
+
+# For better figure resolution
+knitr::opts_chunk$set(
+  fig.retina = 3, 
+  dpi = 300, 
+  fig.width = 6, 
+  fig.asp = 0.618 
+  )
+
+```
 
 ## Dataset Setup
-```{r}
 
+```{r}
+#| label: setup
+global_temps <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-07-11/global_temps.csv')
+nh_temps <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-07-11/nh_temps.csv')
+sh_temps <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-07-11/sh_temps.csv')
+zonann_temps <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-07-11/zonann_temps.csv')
+```
+## Data Cleaning and Transformation
+
+```{r}
+#| label: data-cleaning-transformation
+
+# Reformat data frame to have one observation per row
+zonnan_clean <- zonann_temps |>
+  pivot_longer(
+    cols =  c('EQU-24N',
+              '24N-44N', 
+              '44N-64N', 
+              '64N-90N',  
+              '24S-EQU', 
+              '44S-24S', 
+              '64S-44S', 
+              '90S-64S'),
+    values_to = 'temp_dev',
+    names_to = 'lat_range'
+  ) |>
+  mutate(lat_range = fct_relevel(lat_range, c('64N-90N', 
+                                   '44N-64N',
+                                   '24N-44N',
+                                   'EQU-24N',
+                                   '24S-EQU',
+                                   '44S-24S',
+                                   '64S-44S',
+                                   '90S-64S'))) |>
+  select(c('Year', 'Glob', 'lat_range', 'temp_dev')) 
+
+# Sort data frame rows by latitude range
+zonnan_clean <- zonnan_clean[with(zonnan_clean, order(lat_range, Year)),]
+
+zonnan_clean
+
+# Northern Hemisphere
+nh_temps_long <- nh_temps %>%
+  pivot_longer(cols = -Year, names_to = "Month", values_to = "Temperature_Anomaly") %>%
+  mutate(Hemisphere = "NH")
+# Southern Hemisphere
+sh_temps_long <- sh_temps %>%
+  pivot_longer(cols = -Year, names_to = "Month", values_to = "Temperature_Anomaly") %>%
+  mutate(Hemisphere = "SH")
+
+comprehensive_df_nh <- nh_temps_long %>%
+  mutate(Season = case_when(
+    Month %in% c("Dec", "Jan", "Feb", "DJF") ~ "Winter",
+    Month %in% c("Mar", "Apr", "May", "MAM") ~ "Spring",
+    Month %in% c("Jun", "Jul", "Aug", "JJA") ~ "Summer",
+    Month %in% c("Sep", "Oct", "Nov", "SON") ~ "Fall",
+    Month %in% c("J-D", "D-N") ~ "Annual"
+  ))
+comprehensive_df_sh <- sh_temps_long %>%
+  mutate(Season = case_when(
+    Month %in% c("Dec", "Jan", "Feb", "DJF") ~ "Summer",
+    Month %in% c("Mar", "Apr", "May", "MAM") ~ "Fall",
+    Month %in% c("Jun", "Jul", "Aug", "JJA") ~ "Winter",
+    Month %in% c("Sep", "Oct", "Nov", "SON") ~ "Spring",
+    Month %in% c("J-D", "D-N") ~ "Annual"
+  ))
+
+# Merge the two data frames vertically
+comprehensive_df <- bind_rows(comprehensive_df_nh, comprehensive_df_sh)
+comprehensive_df <- comprehensive_df %>%
+  filter(Season!="Annual")
+# Final comprehensive data frame
+comprehensive_df <- comprehensive_df %>%
+  select(Year, Season, Hemisphere, Temperature_Anomaly) %>%
+  group_by(Year, Hemisphere, Season) %>%
+  summarise(Average_Temperature_Anomaly = mean(Temperature_Anomaly, na.rm = TRUE), .groups = "drop") %>%
+  mutate(Average_Temperature_Anomaly = round(Average_Temperature_Anomaly, 2))
+
+comprehensive_df
+```
+
+## Plots
+
+### Line Graph
+
+```{r, warning=FALSE}
+#| label: line-graph-jeremiah
+
+
+# In order to properly fill space between 0 and geom_line,
+# we need to create dummy samples where geom_line intersects 0.
+# This prevents geom_ribbon from coloring outside the line.
+
+# Our strategy is to identify all intersections through zero 
+# via positive slopes (low to high values) and negative slopes
+# (high to low values).
+
+# Because all data points are 1 unit apart on the x axis,
+# The x axis value of the 0 point may be determined by the 
+# ratio of magnitudes between the low and high values.
+
+devs <- zonnan_clean$temp_dev
+
+idx1 <- which(devs > 0 & zonnan_clean$Year < 2022)
+idx2 <- idx1[which(devs[idx1+1] < 0)]
+
+neg_slope_zeros <- zonnan_clean[idx2,]
+neg_slope_zeros$Year <- neg_slope_zeros$Year +
+  devs[idx2] / (devs[idx2] - devs[idx2+1])
+neg_slope_zeros$temp_dev = 0
+
+idx3 <- which(devs < 0)
+idx4 <- idx3[which(devs[idx3+1] > 0)]
+
+pos_slope_zeros <- zonnan_clean[idx4,]
+pos_slope_zeros$Year <- pos_slope_zeros$Year + 
+  devs[idx4] / (devs[idx4] - devs[idx4+1])
+pos_slope_zeros$temp_dev = 0
+
+zonnan_zeros <- rbind(zonnan_clean, rbind(pos_slope_zeros, neg_slope_zeros)) 
+
+# Separate lower and higher than average values for color filling
+subzero = zonnan_zeros |> 
+  mutate(temp_dev = case_when(temp_dev > 0 ~ 0,
+                              temp_dev <= 0 ~ temp_dev))
+
+above_zero = zonnan_zeros |> 
+  mutate(temp_dev = case_when(temp_dev < 0 ~ 0,
+                              temp_dev >= 0 ~ temp_dev))
+
+ggplot(data=zonnan_clean, aes(x=Year, y=temp_dev)) +
+  facet_grid(lat_range ~ .) +
+  annotate('rect',
+           xmin = 1951,
+           xmax = 1980,
+           ymin = -Inf,
+           ymax = Inf,
+           color='darkgrey',
+           width=0.5,
+           fill="#F0E442", 
+           alpha=0.25) +
+  theme_minimal() +
+  # Fill area below the line when temp_dev is below 0
+  geom_ribbon(data = subzero, aes(ymin=temp_dev, ymax=0), fill="#648FFF", alpha=0.65) +
+  
+  # Fill area above the line when temp_dev is above 0 
+  geom_ribbon(data = above_zero, aes(ymin=0, ymax=temp_dev), fill="#FE6100", alpha=0.65) +
+  geom_line(linewidth=0.5) +
+  theme(
+    strip.background = element_blank(),
+    strip.text.x = element_blank()
+  ) +
+  theme(panel.spacing.x=unit(0.0, "lines"),
+        panel.spacing.y=unit(0, "lines"),
+        panel.border = element_rect(color = "black", fill = NA, linewidth = 0.75), 
+        axis.text.y = element_text(angle = 0)
+  ) +
+  scale_y_continuous(breaks = c(-2,0,2)) +
+  scale_x_continuous(breaks = seq(1880, 2022, 10)) +
+  labs(
+    x = "Year",
+    y = "Temperature Deviations (C)",
+    title = "Yearly Temperature Deviations from Standard Mean",
+    subtitle = "Period by which standard mean was established highlighted in yellow",
+    caption = "Source:- TidyTuesday(2023), Global Surface Temperature"
+  ) 
+```
+`
+### Boxplot
+
+```{r, warning=FALSE}
+#| label: box-plot-mrunal
+#Create a Boxplot
+ggplot(comprehensive_df, aes(x = Season, y = Average_Temperature_Anomaly, fill = Hemisphere)) +
+  geom_boxplot() +
+  labs(
+       title = "Comparison of Temperature Anomalies by Season and Hemisphere",
+       x = "Season",
+       y = "Average Temperature Anomaly",
+       fill = "Hemisphere",
+       caption = "Source:- TidyTuesday(2023), Global Surface Temperature") +
+  theme_minimal() +
+  scale_fill_manual(values = c("#648FFF", "#FE6100"))
+```
+
+### Heatmaps
+
+```{r}
+#| label: heatmap-anjani
+
+library(ggplot2)
+# Determine the overall range of temperature anomalies
+overall_range <- range(comprehensive_df$Average_Temperature_Anomaly, na.rm = TRUE)
+# For NH temperatures
+nh_heatmap <- comprehensive_df %>%
+  filter(Hemisphere == "NH", !is.na(Average_Temperature_Anomaly)) %>%
+  ggplot(aes(x = Season, y = Year, fill = Average_Temperature_Anomaly)) +
+  geom_tile(color = "white") +
+  scale_fill_gradient2(low = "#648FFF", mid = "white", high = "#FE6100", midpoint = 0, limits = overall_range) +
+  labs(title = "Temperature Anomalies in Northern Hemisphere over the years",
+       x = "Season",
+       y = "Year",
+       fill = "Temperature Anomaly",
+       caption = "Source:- TidyTuesday(2023), Global Surface Temperature") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+# For SH temperatures
+sh_heatmap <- comprehensive_df %>%
+  filter(Hemisphere == "SH", !is.na(Average_Temperature_Anomaly)) %>%
+  ggplot(aes(x = Season, y = Year, fill = Average_Temperature_Anomaly)) +
+  geom_tile(color = "white") +
+  scale_fill_gradient2(low = "#648FFF", mid = "white", high = "#FE6100", midpoint = 0, limits = overall_range) +
+  labs(title = "Temperature Anomalies in Southern Hemisphere over the years",
+       x = "Season",
+       y = "Year",
+       fill = "Temperature Anomaly",
+       caption = "Source:- TidyTuesday(2023), Global Surface Temperature") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+# Displaying the heatmaps without Annual and without NA values
+nh_heatmap
+sh_heatmap
 
 ```
 
+### ggmaps
 
-
-## Plots
 ```{r}
+#| label: ggmap-omid
 
+# Calculating the standard deviation of each zone annual temperature anomaly
+data <- zonnan_clean |> 
+  group_by(lat_range) |> 
+  summarise_at(vars(temp_dev), list(name=sd))
+
+# set theme for ggplot2
+ggplot2::theme_set(ggplot2::theme_minimal(base_size = 14))
+
+# set width of code output
+options(width = 65)
+
+# set figure parameters for knitr
+knitr::opts_chunk$set(
+  fig.width = 7,        # 7" width
+  fig.asp = 0.618,      # the golden ratio
+  fig.retina = 3,       # dpi multiplier for displaying HTML output on retina
+  fig.align = "center", # center align figures
+  dpi = 300             # higher dpi, sharper image
+)
+
+# Parsing the lat_range values
+parse_lat_range <- function(lat_range_str) {
+  parts <- strsplit(gsub("N|S|EQU", "", lat_range_str), "-")[[1]]
+  lat_start <- as.numeric(parts[1])
+  if (grepl("S", lat_range_str)) {
+    lat_start <- -lat_start
+  }
+  lat_end <- ifelse(length(parts) > 1, as.numeric(parts[2]), lat_start) # Handle single value ranges
+  if (grepl("S", lat_range_str, fixed = TRUE)) {
+    lat_end <- -lat_end
+  }
+  return(c(lat_start, lat_end))
+}
+
+# Apply parsing function and update data frame
+lat_ranges <- t(sapply(data$lat_range, parse_lat_range))
+data$lat_start <- lat_ranges[, 1]
+data$lat_end <- lat_ranges[, 2]
+
+data <- data %>%
+  mutate(across(everything(), ~replace_na(.x, 0)))
+
+# Plot the map with temperature anomalies
+world_map <- map_data("world")
+
+# Removing some parts of the world_map which fall outside of the world longitude range!
+world_map <- world_map %>%
+  filter(long >= -180 & long <= 180)
+
+# Plotting the main map.
+gg <- ggplot() +
+  geom_polygon(data = world_map, 
+               aes(x = long, y = lat, group = group), 
+               fill = "white", color = "black") +
+  geom_rect(data = data, 
+            aes(xmin = -180, xmax = 180, ymin = lat_start, ymax = lat_end, fill = name), 
+            color = alpha("black", 0.2), alpha = 0.5) +
+  scale_fill_gradient(low = "#648FFF", high = "#FE6100", name = "Std") +
+  coord_fixed(1.3) +  # Maintain aspect ratio
+  labs(title = "The Standard Deviation of Zonnal Annual Temperature Anomalies over 1880 to 2022", 
+       fill = "Anomaly", 
+       x = "Longitude", y = "Latitude",
+       caption = "Source:- TidyTuesday(2023), Global Surface Temperature") +
+  scale_x_continuous(breaks = seq(-180, 180, by = 20), 
+                     labels = paste(seq(-180, 180, by = 20), "°", sep = ""), 
+                     limits = c(-180, 180), 
+                     expand = c(0, 0)) +
+  scale_y_continuous(breaks = c(-90, -64, -44, -24, 0, 24, 44, 64, 90), 
+                     labels = paste(c(-90, -64, -44, -24, 0, 24, 44, 64, 90), "°", sep = ""), 
+                     expand = c(0, 0)) + 
+  theme(plot.margin = margin(t = 0,  # Top margin
+                             r = 0,  # Right margin
+                             b = 0,  # Bottom margin
+                             l = 0),
+        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 10),
+        axis.text.y = element_text(size = 10),
+        plot.title = element_text(size = 10),
+        axis.text = element_text(size = 20),
+        axis.title.x = element_text(size = 10),
+        axis.title.y = element_text(size = 10))
+
+# Print the plot
+print(gg)
+```
+
+```{r, warning=FALSE}
+#| label: ggmap-surajit
+
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(maps)
+
+# set theme for ggplot2
+ggplot2::theme_set(ggplot2::theme_minimal(base_size = 11))
+
+# set width of code output
+options(width = 65)
+
+# set figure parameters for knitr
+knitr::opts_chunk$set(
+  fig.width = 12,        # 7" width
+  fig.asp = 1.2,      # the golden ratio
+  fig.retina = 3,       # dpi multiplier for displaying HTML output on retina
+  fig.align = "center", # center align figures
+  dpi = 300             # higher dpi, sharper image
+)
+
+# Assuming the zones represent bands from the equator to the poles.
+latitude_ranges <- tibble(
+  Zone = c("90S-64S", "64S-44S", "44S-24S", "24S-EQU", "EQU-24N", "24N-44N", "44N-64N", "64N-90N"),
+  lat_start = c(-90, -64, -44, -24, 0, 24, 44, 64),
+  lat_end = c(-64, -44, -24, 0, 24, 44, 64, 90)
+)
+
+# Transform zonann_temps to long format and assign latitude ranges
+zonann_long <- zonann_temps %>%
+  pivot_longer(
+    cols = -Year,
+    names_to = "Zone",
+    values_to = "Temperature_Anomaly"
+  ) %>%
+  inner_join(latitude_ranges, by = "Zone")
+
+# Determine the hemisphere based on latitude ranges and merge
+zonann_long <- zonann_long %>%
+  mutate(Hemisphere = if_else(lat_start >= 0, "NH", "SH"))
+
+merged_data <- comprehensive_df %>%
+  inner_join(zonann_long, by = c("Year","Hemisphere"))
+
+merged_data <- merged_data %>%
+  select(-Zone, -Temperature_Anomaly)
+
+# Filter for Fall data for both NH and SH
+fall_data <- merged_data %>%
+  filter(Season == "Fall")
+
+# Filter for Spring data for both NH and SH
+spring_data <- merged_data %>%
+  filter(Season == "Spring")
+
+# Filter for Summer data for both NH and SH
+summer_data <- merged_data %>%
+  filter(Season == "Summer")
+
+# Filter for Winter data for both NH and SH
+winter_data <- merged_data %>%
+  filter(Season == "Winter")
+
+# Combine all seasonal data for 1880
+all_seasons_data_1880 <- bind_rows(
+  winter_data %>% filter(Year == 1880) %>% mutate(Season = "Winter"),
+  summer_data %>% filter(Year == 1880) %>% mutate(Season = "Summer"),
+  spring_data %>% filter(Year == 1880) %>% mutate(Season = "Spring"),
+  fall_data %>% filter(Year == 1880) %>% mutate(Season = "Fall")
+)
+
+# Combine all seasonal data for 1951
+all_seasons_data_1951 <- bind_rows(
+  winter_data %>% filter(Year == 1951) %>% mutate(Season = "Winter"),
+  summer_data %>% filter(Year == 1951) %>% mutate(Season = "Summer"),
+  spring_data %>% filter(Year == 1951) %>% mutate(Season = "Spring"),
+  fall_data %>% filter(Year == 1951) %>% mutate(Season = "Fall")
+)
+
+# Combine all seasonal data for 2022
+all_seasons_data_2022 <- bind_rows(
+  winter_data %>% filter(Year == 2022) %>% mutate(Season = "Winter"),
+  summer_data %>% filter(Year == 2022) %>% mutate(Season = "Summer"),
+  spring_data %>% filter(Year == 2022) %>% mutate(Season = "Spring"),
+  fall_data %>% filter(Year == 2022) %>% mutate(Season = "Fall")
+)
+
+plot_all_seasons_temperature_anomaly <- function(data, year) {
+  # Filter for the given year
+  data_year <- data %>% filter(Year == year)
+
+  # Define the color palette for consistency across plots
+  color_palette <- c("#648FFF", "#FE6100")
+
+  # Get the world map data
+  world_map <- map_data("world")
+
+  # Plot the map with facets for each season
+  gg <- ggplot(data = data_year) +
+    geom_rect(aes(xmin = -180, xmax = 180, ymin = lat_start, ymax = lat_end, fill = Average_Temperature_Anomaly), color = "black") +
+    geom_polygon(data = world_map, aes(x = long, y = lat, group = group), fill = NA, color = "black", alpha = 0.5) +
+    scale_fill_gradient(low = color_palette[1], high = color_palette[2], name = "Avg Temp Anomaly") +
+    coord_fixed(1.3) +
+    labs(title = paste("Temperature Anomaly for", year), x = "Longitude", y = "Latitude") +
+    facet_wrap(~Season) + # Ensures that the season name is retained
+    theme_minimal() +
+    scale_x_continuous(breaks = seq(-180, 180, by = 60), 
+                       labels = paste(seq(-180, 180, by = 60), "°", sep = ""), 
+                       limits = c(-180, 180)) +
+    scale_y_continuous(breaks = c(-90, -64, -44, -24, 0, 24, 44, 64, 90), 
+                       labels = paste(c(-90, -64, -44, -24, 0, 24, 44, 64, 90), "°", sep = "")) + 
+    theme(plot.margin = margin(t = 0, r = 0, b = 0, l = 0),
+          axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
+          axis.text.y = element_text(),
+          plot.title = element_text(size = 14, hjust = 0.5),
+          strip.text = element_text(size = 10)) # Adjust the size of the facet label text if necessary
+
+  return(gg)
+}
+
+# Plot all seasons for 1880 with consistent legend colors
+plot_1880 <- plot_all_seasons_temperature_anomaly(all_seasons_data_1880, 1880)
+
+# Plot all seasons for 1951 with consistent legend colors
+plot_1951 <- plot_all_seasons_temperature_anomaly(all_seasons_data_1951, 1951)
+
+# Plot all seasons for 2022 with consistent legend colors
+plot_2022 <- plot_all_seasons_temperature_anomaly(all_seasons_data_2022, 2022)
+
+# Print the plots
+print(plot_1880)
+print(plot_1951)
+print(plot_2022)
 
 ```
