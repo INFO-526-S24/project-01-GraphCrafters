@@ -79,16 +79,16 @@
   {
     "objectID": "presentation.html#math-expressions",
     "href": "presentation.html#math-expressions",
-    "title": "Project title",
+    "title": "Exploring Global Surface Temperature Anomalies",
     "section": "Math Expressions",
     "text": "Math Expressions\nYou can write LaTeX math expressions inside a pair of dollar signs, e.g. $\\alpha+\\beta$ renders \\(\\alpha + \\beta\\). You can use the display style with double dollar signs:\n$$\\bar{X}=\\frac{1}{n}\\sum_{i=1}^nX_i$$\n\\[\n\\bar{X}=\\frac{1}{n}\\sum_{i=1}^nX_i\n\\]\nLimitations:\n\nThe source code of a LaTeX math expression must be in one line, unless it is inside a pair of double dollar signs, in which case the starting $$ must appear in the very beginning of a line, followed immediately by a non-space character, and the ending $$ must be at the end of a line, led by a non-space character;\nThere should not be spaces after the opening $ or before the closing $."
   },
   {
     "objectID": "presentation.html#feeling-adventurous",
     "href": "presentation.html#feeling-adventurous",
-    "title": "Project title",
+    "title": "Exploring Global Surface Temperature Anomalies",
     "section": "Feeling adventurous?",
-    "text": "Feeling adventurous?\n\nYou are welcomed to use the default styling of the slides. In fact, that's what I expect majority of you will do. You will differentiate yourself with the content of your presentation.\nBut some of you might want to play around with slide styling. Some solutions for this can be found at https://quarto.org/docs/presentations/revealjs."
+    "text": "Feeling adventurous?\n\nYou are welcomed to use the default styling of the slides. In fact, that’s what I expect majority of you will do. You will differentiate yourself with the content of your presentation.\nBut some of you might want to play around with slide styling. Some solutions for this can be found at https://quarto.org/docs/presentations/revealjs."
   },
   {
     "objectID": "index.html",
@@ -117,6 +117,51 @@
     "title": "Global Surface Temperature",
     "section": "",
     "text": "global_temps &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-07-11/global_temps.csv')\nnh_temps &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-07-11/nh_temps.csv')\nsh_temps &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-07-11/sh_temps.csv')\nzonann_temps &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-07-11/zonann_temps.csv')\n\nIntroduction:\nThe dataset is provided by NASA by combining land-surface, sea surface, air temperature anomalies. The values in the dataset are deviations from the corresponding 1951-1980 means, indicating how much warmer or colder it is than normal for a particular place and time, and the normal means the average over the 30-year period 1951-1980 for that place and time of year. More precisely, the base 1951-1980 mean is subtracted from the absolute temperature to get the anomaly.\nA brief description of the datasets is as below:\nglobal_temps.csv: provides temperature anomalies of each month for every year. Seasonal and yearly anomaly averages are included as a convenience.\n\n\n\n\n\nvariable\nclass\ndescription\n\n\n\n\nYear\ndouble\nYear\n\n\nJan\ndouble\nGlobal Temperature Anomalies in January\n\n\nFeb\ndouble\nGlobal Temperature Anomalies in February\n\n\nMar\ndouble\nGlobal Temperature Anomalies in March\n\n\nApr\ndouble\nGlobal Temperature Anomalies in April\n\n\nMay\ndouble\nGlobal Temperature Anomalies in May\n\n\nJun\ndouble\nGlobal Temperature Anomalies in June\n\n\nJul\ndouble\nGlobal Temperature Anomalies in July\n\n\nAug\ndouble\nGlobal Temperature Anomalies in August\n\n\nSep\ndouble\nGlobal Temperature Anomalies in September\n\n\nOct\ndouble\nGlobal Temperature Anomalies in October\n\n\nNov\ndouble\nGlobal Temperature Anomalies in November\n\n\nDec\ndouble\nGlobal Temperature Anomalies in December\n\n\nJ-D\ndouble\nGlobal Temperature Anomalies in January-December\n\n\nD-N\ndouble\nGlobal Temperature Anomalies in Decemeber-November\n\n\nDJF\ndouble\nGlobal Temperature Anomalies in December-January-February\n\n\nMAM\ndouble\nGlobal Temperature Anomalies in March-April-May\n\n\nJJA\ndouble\nGlobal Temperature Anomalies in June-July-August\n\n\nSON\ndouble\nGlobal Temperature Anomalies in September-October-November\n\n\n\n\n\n\n\nnh_temps.csv & sh_temps.csv: contain the same data structures as global_temps, but are specific to northern and southern hemispheres, respectively.\n\n\n\n\n\nvariable\nclass\ndescription\n\n\n\n\nYear\ndouble\nYear\n\n\nJan\ndouble\nNorthern Hemisphere Temperature Anomalies in January\n\n\nFeb\ndouble\nNorthern Hemisphere Temperature Anomalies in February\n\n\nMar\ndouble\nNorthern Hemisphere Temperature Anomalies in March\n\n\nApr\ndouble\nNorthern Hemisphere Temperature Anomalies in April\n\n\nMay\ndouble\nNorthern Hemisphere Temperature Anomalies in May\n\n\nJun\ndouble\nNorthern Hemisphere Temperature Anomalies in June\n\n\nJul\ndouble\nNorthern Hemisphere Temperature Anomalies in July\n\n\nAug\ndouble\nNorthern Hemisphere Temperature Anomalies in August\n\n\nSep\ndouble\nNorthern Hemisphere Temperature Anomalies in September\n\n\nOct\ndouble\nNorthern Hemisphere Temperature Anomalies in October\n\n\nNov\ndouble\nNorthern Hemisphere Temperature Anomalies in November\n\n\nDec\ndouble\nNorthern Hemisphere Temperature Anomalies in December\n\n\nJ-D\ndouble\nNorthern Hemisphere Temperature Anomalies in January-December\n\n\nD-N\ndouble\nNorthern Hemisphere Temperature Anomalies in Decemeber-November\n\n\nDJF\ndouble\nNorthern Hemisphere Temperature Anomalies in December-January-February\n\n\nMAM\ndouble\nNorthern Hemisphere Temperature Anomalies in March-April-May\n\n\nJJA\ndouble\nNorthern Hemisphere Temperature Anomalies in June-July-August\n\n\nSON\ndouble\nNorthern Hemisphere Temperature Anomalies in September-October-November\n\n\n\n\n\n\n\n\n\n\n\n\nvariable\nclass\ndescription\n\n\n\n\nYear\ndouble\nYear\n\n\nJan\ndouble\nSouthern Hemisphere Temperature Anomalies in January\n\n\nFeb\ndouble\nSouthern Hemisphere Temperature Anomalies in February\n\n\nMar\ndouble\nSouthern Hemisphere Temperature Anomalies in March\n\n\nApr\ndouble\nSouthern Hemisphere Temperature Anomalies in April\n\n\nMay\ndouble\nSouthern Hemisphere Temperature Anomalies in May\n\n\nJun\ndouble\nSouthern Hemisphere Temperature Anomalies in June\n\n\nJul\ndouble\nSouthern Hemisphere Temperature Anomalies in July\n\n\nAug\ndouble\nSouthern Hemisphere Temperature Anomalies in August\n\n\nSep\ndouble\nSouthern Hemisphere Temperature Anomalies in September\n\n\nOct\ndouble\nSouthern Hemisphere Temperature Anomalies in October\n\n\nNov\ndouble\nSouthern Hemisphere Temperature Anomalies in November\n\n\nDec\ndouble\nSouthern Hemisphere Temperature Anomalies in December\n\n\nJ-D\ndouble\nSouthern Hemisphere Temperature Anomalies in January-December\n\n\nD-N\ndouble\nSouthern Hemisphere Temperature Anomalies in December-November\n\n\nDJF\ndouble\nSouthern Hemisphere Temperature Anomalies in December-January-February\n\n\nMAM\ndouble\nSouthern Hemisphere Temperature Anomalies in March-April-May\n\n\nJJA\ndouble\nSouthern Hemisphere Temperature Anomalies in June-July-August\n\n\nSON\ndouble\nSouthern Hemisphere Temperature Anomalies in September-October-November\n\n\n\n\n\n\n\nzonann_temps.csv: contains annual anomaly averages of multiple locales at varying granularity. This includes data at the global and hemispheric levels, as well as 11 unique latitudinal ranges between the Northern and Southern poles.\n\n\n\n\n\nvariable\nclass\ndescription\n\n\n\n\nYear\ndouble\nYear\n\n\nGlob\ndouble\nGlobal\n\n\nNHem\ndouble\nNorthern Hemisphere\n\n\nSHem\ndouble\nSouthern Hemisphere\n\n\n24N-90N\ndouble\n24N-90N lattitude\n\n\n24S-24N\ndouble\n24S-24N lattitude\n\n\n90S-24S\ndouble\n90S-24S lattitude\n\n\n64N-90N\ndouble\n64N-90N lattitude\n\n\n44N-64N\ndouble\n44N-64N lattitude\n\n\n24N-44N\ndouble\n24N-44N lattitude\n\n\nEQU-24N\ndouble\nEQU-24N lattitude\n\n\n24S-EQU\ndouble\n24S-EQU lattitude\n\n\n44S-24S\ndouble\n44S-24S lattitude\n\n\n64S-44S\ndouble\n64S-44S lattitude\n\n\n90S-64S\ndouble\n90S-64S lattitude"
+<<<<<<< Updated upstream
+  },
+  {
+    "objectID": "proposal.html#why-this-dataset",
+    "href": "proposal.html#why-this-dataset",
+    "title": "Global Surface Temperature",
+    "section": "Why this Dataset?",
+    "text": "Why this Dataset?\nAnalyzing climate datasets: These datasets can help us understand past and present climate trends, and potentially predict future patterns.\nComprehensive view: The datasets provide a comprehensive view of temperature changes from different perspectives - global, Northern Hemisphere, Southern Hemisphere, and zonal annual temperatures.\nImpact on businesses: The weather is changing significantly in some places, which might necessitate changes in how businesses operate in those areas.\nFuture planning for businesses: By analyzing the temperature data, businesses can make plans for the future and decide what changes they might need to make to ensure their continued success."
+=======
+>>>>>>> Stashed changes
+  },
+  {
+    "objectID": "proposal.html#questions",
+    "href": "proposal.html#questions",
+    "title": "Global Surface Temperature",
+    "section": "Questions",
+<<<<<<< Updated upstream
+    "text": "Questions\n\nHow can visualizations of the dataset illuminate trends in global and hemispheric temperature anomalies over time, aiding in the understanding of climate change’s progression and its impacts on different regions of the Earth?\nIn what ways can comparing visualized data of seasonal temperature anomalies, as defined by meteorological seasons, provide insights into the shifting patterns of seasons and their potential effects on human livelihoods?"
+=======
+    "text": "Questions\n\nHow can visualizations of the dataset illuminate trends in global and hemispheric annual temperature anomalies over time, aiding in the understanding of climate change’s progression and its impacts on different regions of the Earth?\nIn what ways can comparing visualized data of seasonal temperature anomalies, as defined by meteorological seasons, provide insights into the shifting patterns of seasons and their potential effects on human livelihoods?"
+>>>>>>> Stashed changes
+  },
+  {
+    "objectID": "proposal.html#analysis-plan",
+    "href": "proposal.html#analysis-plan",
+    "title": "Global Surface Temperature",
+    "section": "Analysis plan",
+<<<<<<< Updated upstream
+    "text": "Analysis plan\nReferring to Question 1:\nGlobal Temperature Trends: Plot global temperature anomalies over time using a line graph. Analyze the trend to understand long-term changes.\ncsv file to be used: global_temps.csv\nZonal Temperature Comparisons: Use facet graphs (example: bar, line, scatter) to compare temperature anomalies across different zones. Analyze mean deviations to understand variations within and between zones.\ncsv file to be used: zonann_temps.csv\nReferring to Question 2:\nLatitude-based Temperature Anomalies: Create a heat map to visualize anomalies across latitude ranges and seasonal changes. Analyze spatial patterns to identify regions most affected by climate change.\ncsv file to be used: zonann_temps.csv\nGlobal Temperature Visualization: Utilize ggmap to overlay temperature data onto a global map. Incorporate geographic features to contextualize temperature variations.\ncsv file to be used: zonann_temps.csv, global_temps.csv\nHemispheric Comparisons: Construct side-by-side box plots to compare hemispheric anomalies. Analyze differences in temperature patterns between hemispheres.\ncsv file to be used: nh_temps.csv and sh_temps.csv\nNote: For the questions where multiple csv files are used, the ‘year’ column will be used to join the columns (using inner_join()) and change the names (if required) and then work on the plots.\nAnalysis and Interpretation: Evaluate trends and patterns to identify regions experiencing significant anomalies. Upon analyzing the variations in different visualizations, we would be able to infer the effect of temperature anomalies on human livelihood for example in agriculture, tourism, health and global warming and discuss strategic adjustments to mitigate climate changes and work on technology advancements to improve in the future."
+=======
+    "text": "Analysis plan\nReferring to Question 1:\nGlobal Temperature Trends: Plot global temperature anomalies over time using a line graph. Analyze the trend to understand long-term changes.\nZonal Temperature Comparisons: Use facet graphs (example: bar, line, scatter) to compare temperature anomalies across different zones. Analyze mean deviations to understand variations within and between zones.\nDetailed Plan:\n\nUse the zonnan_temps.csv dataset to answer questions.\nTransform data from wide format to long format:\n\nCreate a new column called “zones”.\nMerge all eight variables related to zones (EQ-24N, 24N-44N, 44N-64N, 64N-90N, EQ-24S, 24S-44S, 44S-64S, 64S-90S) into the “zones” column.\n\nResulting data frame will have three columns:\n\nYear\nZone\nAnomalies.\n\n\nReferring to Question 2:\nLatitude-based Temperature Anomalies: Create a heat map to visualize anomalies across latitude ranges and seasonal changes. Analyze spatial patterns to identify regions most affected by climate change.\nGlobal Temperature Visualization: Utilize ggmap to overlay temperature data onto a global map. Incorporate geographic features to contextualize temperature variations.\nHemispheric Comparisons: Construct side-by-side box plots to compare hemispheric anomalies. Analyze differences in temperature patterns between hemispheres.\nDetailed Plan:\n\nObtain nh_temps.csv and sh_temps.csv datasets.\nConvert each dataset to long format:\n\nCreate a new column for each month (Jan, Feb, …, Nov, Dec).\nInclude a column for hemispheres (NH and SH).\nAdd a column for temperature anomalies.\n\nMerge the two data frames obtained from the CSV files vertically to create one comprehensive data frame.\nFor seasonal analysis:\n\nDefine variables for the four seasons: DJF (Winter), MAM (Spring), JJA (Summer), and SON (Fall) in the northern hemisphere.\nCreate a season column and merge the four seasons into it.\n\nFinally, the comprehensive data frame should have four columns:\n\nYear\nSeason\nHemisphere (Northern or Southern)\nTemperature anomalies.\n\n\nAnalysis and Interpretation: Evaluate trends and patterns to identify regions experiencing significant anomalies. Upon analyzing the variations in different visualizations, we would be able to infer the effect of temperature anomalies on human livelihood for example in agriculture, tourism, health and global warming and discuss strategic adjustments to mitigate climate changes and work on technology advancements to improve in the future."
+  },
+  {
+    "objectID": "presentation.html",
+    "href": "presentation.html",
+    "title": "Project title",
+    "section": "",
+    "text": "The presentation is created using the Quarto CLI\n## sets the start of a new slide\n\n\n\n\nYou can use plain text\n\n\n\nor bullet points1\n\n\nor in two columns\n\n\n\nlike\nthis\n\n\n\n\n\n\n# A tibble: 2 × 5\n  term        estimate std.error statistic       p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;\n1 (Intercept)   25.3      3.08        8.22 0.00000000358\n2 speed         -0.116    0.0642     -1.81 0.0806       \n\n\n# A tibble: 1 × 12\n  r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC\n      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1    0.0983        0.0682  5.82      3.27  0.0806     1  -101.  207.  212.\n# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;\n\n\n\n\n\n\n\nWarning: Removed 2 rows containing missing values (`geom_point()`).\n\n\n\n\n\n\n\n\n\n\n\nSome text\ngoes here"
+  },
+  {
+    "objectID": "presentation.html#footnotes",
+    "href": "presentation.html#footnotes",
+    "title": "Project title",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nAnd add footnotes↩︎"
   },
   {
     "objectID": "proposal.html#why-this-dataset",
@@ -126,17 +171,81 @@
     "text": "Why this Dataset?\nAnalyzing climate datasets: These datasets can help us understand past and present climate trends, and potentially predict future patterns.\nComprehensive view: The datasets provide a comprehensive view of temperature changes from different perspectives - global, Northern Hemisphere, Southern Hemisphere, and zonal annual temperatures.\nImpact on businesses: The weather is changing significantly in some places, which might necessitate changes in how businesses operate in those areas.\nFuture planning for businesses: By analyzing the temperature data, businesses can make plans for the future and decide what changes they might need to make to ensure their continued success."
   },
   {
-    "objectID": "proposal.html#questions",
-    "href": "proposal.html#questions",
+    "objectID": "proposal.html#timeline",
+    "href": "proposal.html#timeline",
     "title": "Global Surface Temperature",
-    "section": "Questions",
-    "text": "Questions\n\nHow can visualizations of the dataset illuminate trends in global and hemispheric temperature anomalies over time, aiding in the understanding of climate change’s progression and its impacts on different regions of the Earth?\nIn what ways can comparing visualized data of seasonal temperature anomalies, as defined by meteorological seasons, provide insights into the shifting patterns of seasons and their potential effects on human livelihoods?"
+    "section": "Timeline",
+    "text": "Timeline\nWeek 1 (18th - 24th February):\n1. Perform initial data cleaning and preprocessing.\n2. Conduct exploratory data analysis (EDA) on all the datasets.\nWeek 2 (25th February - 3rd March):\n1. Start building the visualizations (according to the proposal) to predict future temperature anomalies.\n2. Evaluate the plots using appropriate metrics.\nWeek 3 (4th - 9th March):\n1. Continue with building the plots and parameter tuning.\n2. Prepare a detailed report of the analysis.\n3. Finalize the report and prepare for presentation."
   },
   {
-    "objectID": "proposal.html#analysis-plan",
-    "href": "proposal.html#analysis-plan",
-    "title": "Global Surface Temperature",
-    "section": "Analysis plan",
-    "text": "Analysis plan\nReferring to Question 1:\nGlobal Temperature Trends: Plot global temperature anomalies over time using a line graph. Analyze the trend to understand long-term changes.\ncsv file to be used: global_temps.csv\nZonal Temperature Comparisons: Use facet graphs (example: bar, line, scatter) to compare temperature anomalies across different zones. Analyze mean deviations to understand variations within and between zones.\ncsv file to be used: zonann_temps.csv\nReferring to Question 2:\nLatitude-based Temperature Anomalies: Create a heat map to visualize anomalies across latitude ranges and seasonal changes. Analyze spatial patterns to identify regions most affected by climate change.\ncsv file to be used: zonann_temps.csv\nGlobal Temperature Visualization: Utilize ggmap to overlay temperature data onto a global map. Incorporate geographic features to contextualize temperature variations.\ncsv file to be used: zonann_temps.csv, global_temps.csv\nHemispheric Comparisons: Construct side-by-side box plots to compare hemispheric anomalies. Analyze differences in temperature patterns between hemispheres.\ncsv file to be used: nh_temps.csv and sh_temps.csv\nNote: For the questions where multiple csv files are used, the ‘year’ column will be used to join the columns (using inner_join()) and change the names (if required) and then work on the plots.\nAnalysis and Interpretation: Evaluate trends and patterns to identify regions experiencing significant anomalies. Upon analyzing the variations in different visualizations, we would be able to infer the effect of temperature anomalies on human livelihood for example in agriculture, tourism, health and global warming and discuss strategic adjustments to mitigate climate changes and work on technology advancements to improve in the future."
+    "objectID": "presentation.html#abstract",
+    "href": "presentation.html#abstract",
+    "title": "Exploring Global Surface Temperature Anomalies",
+    "section": "Abstract",
+    "text": "Abstract\n\nThis project utilizes R programming and libraries such as tidyverse, ggplot2, and ggmap to analyze NASA datasets on global surface temperature anomalies.\nIt explores temperature trends across regions and seasons, encompassing global, Northern Hemisphere, Southern Hemisphere, and zonal anomalies.\nThrough preprocessing and visualization techniques including boxplots, heatmaps, and geographical maps, the project identifies trends and patterns in temperature anomalies.\nBy comparing hemispheres, examining seasonal variations, and assessing standard deviations across latitudinal zones, the analysis enhances understanding of climate change impacts on global temperatures.\nThe project’s visualizations and analyses contribute valuable insights to the discourse on climate change, aiding researchers, policymakers, and the public in addressing environmental challenges."
+  },
+  {
+    "objectID": "presentation.html#data",
+    "href": "presentation.html#data",
+    "title": "Exploring Global Surface Temperature Anomalies",
+    "section": "Data",
+    "text": "Data"
+  },
+  {
+    "objectID": "presentation.html#lineplot",
+    "href": "presentation.html#lineplot",
+    "title": "Exploring Global Surface Temperature Anomalies",
+    "section": "Lineplot",
+    "text": "Lineplot"
+  },
+  {
+    "objectID": "presentation.html#boxplot",
+    "href": "presentation.html#boxplot",
+    "title": "Exploring Global Surface Temperature Anomalies",
+    "section": "Boxplot",
+    "text": "Boxplot"
+  },
+  {
+    "objectID": "presentation.html#heatmap-nh",
+    "href": "presentation.html#heatmap-nh",
+    "title": "Exploring Global Surface Temperature Anomalies",
+    "section": "Heatmap (NH)",
+    "text": "Heatmap (NH)"
+  },
+  {
+    "objectID": "presentation.html#heatmap-sh",
+    "href": "presentation.html#heatmap-sh",
+    "title": "Exploring Global Surface Temperature Anomalies",
+    "section": "Heatmap (SH)",
+    "text": "Heatmap (SH)"
+  },
+  {
+    "objectID": "presentation.html#ggmap",
+    "href": "presentation.html#ggmap",
+    "title": "Exploring Global Surface Temperature Anomalies",
+    "section": "ggmap",
+    "text": "ggmap"
+  },
+  {
+    "objectID": "presentation.html#ggmap_1880",
+    "href": "presentation.html#ggmap_1880",
+    "title": "Exploring Global Surface Temperature Anomalies",
+    "section": "ggmap_1880",
+    "text": "ggmap_1880"
+  },
+  {
+    "objectID": "presentation.html#ggmap_1951",
+    "href": "presentation.html#ggmap_1951",
+    "title": "Exploring Global Surface Temperature Anomalies",
+    "section": "ggmap_1951",
+    "text": "ggmap_1951"
+  },
+  {
+    "objectID": "presentation.html#ggmap_2022",
+    "href": "presentation.html#ggmap_2022",
+    "title": "Exploring Global Surface Temperature Anomalies",
+    "section": "ggmap_2022",
+    "text": "ggmap_2022"
+>>>>>>> Stashed changes
   }
 ]
