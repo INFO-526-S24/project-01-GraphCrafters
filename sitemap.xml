@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://INFO-526-S24.github.io/project-01-GraphCrafters/data/README 2.html</loc>
-    <lastmod>2024-02-14T18:09:28.037Z</lastmod>
-  </url>
-  <url>
-    <loc>https://INFO-526-S24.github.io/project-01-GraphCrafters/about.html</loc>
-    <lastmod>2024-02-14T18:09:28.037Z</lastmod>
-  </url>
-  <url>
-    <loc>https://INFO-526-S24.github.io/project-01-GraphCrafters/presentation.html</loc>
-    <lastmod>2024-02-14T18:09:28.077Z</lastmod>
+    <loc>https://INFO-526-S24.github.io/project-01-GraphCrafters/proposal.html</loc>
+    <lastmod>2024-03-10T23:03:48.363Z</lastmod>
   </url>
   <url>
     <loc>https://INFO-526-S24.github.io/project-01-GraphCrafters/index.html</loc>
-    <lastmod>2024-02-14T18:09:28.077Z</lastmod>
+    <lastmod>2024-03-10T23:03:40.078Z</lastmod>
   </url>
   <url>
-    <loc>https://INFO-526-S24.github.io/project-01-GraphCrafters/proposal.html</loc>
-    <lastmod>2024-02-16T02:57:12.303Z</lastmod>
+    <loc>https://INFO-526-S24.github.io/project-01-GraphCrafters/about.html</loc>
+    <lastmod>2024-03-10T23:03:32.018Z</lastmod>
+  </url>
+  <url>
+    <loc>https://INFO-526-S24.github.io/project-01-GraphCrafters/data/README 2.html</loc>
+    <lastmod>2024-03-10T23:03:35.305Z</lastmod>
+  </url>
+  <url>
+    <loc>https://INFO-526-S24.github.io/project-01-GraphCrafters/presentation.html</loc>
+    <lastmod>2024-03-10T23:03:43.712Z</lastmod>
   </url>
 </urlset>
