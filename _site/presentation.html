@@ -8,15 +8,10 @@
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.549">
+  <meta name="generator" content="quarto-1.3.450">
 
-<<<<<<< Updated upstream
-  <meta name="author" content="Author names">
-  <title>Historic Global Surface Temperatures: An Analysis - Project title</title>
-=======
   <meta name="author" content="The Graph Crafters">
-  <title>Project Title - Exploring Global Surface Temperature Anomalies</title>
->>>>>>> Stashed changes
+  <title>Historic Global Surface Temperatures: An Analysis - Exploring Global Surface Temperature Anomalies</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -161,8 +156,7 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    padding-bottom: 0.5rem;
-    margin-bottom: 0;
+    margin-bottom: 0.5rem;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -325,11 +319,6 @@
       margin-right: 0; 
     }
   </style>
-<<<<<<< Updated upstream
-  <script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
-  <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-=======
->>>>>>> Stashed changes
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -356,86 +345,35 @@ The Graph Crafters
 <section id="abstract" class="slide level2">
 <h2>Abstract</h2>
 <ul>
-<li><p>This project utilizes R programming and libraries such as tidyverse, ggplot2, and ggmap to analyze NASA datasets on global surface temperature anomalies.</p></li>
-<li><p>It explores temperature trends across regions and seasons, encompassing global, Northern Hemisphere, Southern Hemisphere, and zonal anomalies.</p></li>
-<li><p>Through preprocessing and visualization techniques including boxplots, heatmaps, and geographical maps, the project identifies trends and patterns in temperature anomalies.</p></li>
+<li><p>This project utilizes R programming and libraries such as tidyverse and ggplot2 to analyze NASA datasets on global surface temperature anomalies.</p></li>
+<li><p>It explores temperature trends across regions and seasons, encompassing global, Northern Hemisphere, Southern Hemisphere, and zonal anomalies through preprocessing and visualization techniques including boxplots, heatmaps, and geographical maps, the project identifies trends and patterns in temperature anomalies.</p></li>
+</ul>
+</section>
+<section id="abstract-1" class="slide level2">
+<h2>Abstract</h2>
+<ul>
 <li><p>By comparing hemispheres, examining seasonal variations, and assessing standard deviations across latitudinal zones, the analysis enhances understanding of climate change impacts on global temperatures.</p></li>
 <li><p>The project’s visualizations and analyses contribute valuable insights to the discourse on climate change, aiding researchers, policymakers, and the public in addressing environmental challenges.</p></li>
 </ul>
-<<<<<<< Updated upstream
-</section>
-<section id="layouts" class="slide level2">
-<h2>Layouts</h2>
-<p>You can use plain text</p>
-<div class="columns">
-<div class="column" style="width:40%;">
-<ul>
-<li>or bullet points<sup>1</sup></li>
-</ul>
-</div><div class="column" style="width:60%;">
-<p>or in two columns</p>
-</div>
-</div>
-<ul>
-<li><p>like</p></li>
-<li><p>this</p></li>
-</ul>
-<aside><ol class="aside-footnotes"><li id="fn1"><p>And add footnotes</p></li></ol></aside></section>
-<section id="code" class="slide level2">
-<h2>Code</h2>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2 × 5
-  term        estimate std.error statistic       p.value
-  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
-1 (Intercept)   25.3      3.08        8.22 0.00000000358
-2 speed         -0.116    0.0642     -1.81 0.0806       </code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 12
-  r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC
-      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1    0.0983        0.0682  5.82      3.27  0.0806     1  -101.  207.  212.
-# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</code></pre>
-</div>
-</div>
-</section>
-<section id="plots" class="slide level2">
-<h2>Plots</h2>
-
-<img data-src="presentation_files/figure-revealjs/unnamed-chunk-5-1.png" width="1800" class="r-stretch"></section>
-<section id="plot-and-text" class="slide level2">
-<h2>Plot and text</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<ul>
-<li><p>Some text</p></li>
-<li><p>goes here</p></li>
-</ul>
-</div><div class="column" style="width:50%;">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="presentation_files/figure-revealjs/unnamed-chunk-6-1.png" width="1650"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
-=======
->>>>>>> Stashed changes
 </section></section>
 <section>
-<section id="here-we-go" class="title-slide slide level1 center">
-<h1>Here we go…!!!</h1>
+<section id="analysis-of-zonal-temperature-anomalies" class="title-slide slide level1 center">
+<h1>Analysis of Zonal Temperature Anomalies</h1>
 
 </section>
-<section id="lineplot" class="slide level2">
-<h2>Lineplot</h2>
+<section id="time-series-analysis---line-graph" class="slide level2">
+<h2>Time Series Analysis - Line Graph</h2>
 
 <img data-src="images/lineplot_timeseries.png" class="r-stretch quarto-figure-center"></section>
+<section id="world-map" class="slide level2">
+<h2>World Map</h2>
+
+<img data-src="images/worldmap.png" class="r-stretch quarto-figure-center"></section></section>
+<section>
+<section id="analysis-of-seasonal-temperature-anomalies" class="title-slide slide level1 center">
+<h1>Analysis of Seasonal Temperature anomalies</h1>
+
+</section>
 <section id="boxplot" class="slide level2">
 <h2>Boxplot</h2>
 
@@ -443,61 +381,30 @@ The Graph Crafters
 <section id="heatmap-nh" class="slide level2">
 <h2>Heatmap (NH)</h2>
 
-<<<<<<< Updated upstream
-<img data-src="images/watercolour_sys02_img34_teacup-ocean.png" class="quarto-figure quarto-figure-center r-stretch" width="500"><p class="caption">Image credit: Danielle Navarro, Percolate.</p></section>
-<section id="math-expressions" class="slide level2 smaller">
-<h2>Math Expressions</h2>
-<p>You can write LaTeX math expressions inside a pair of dollar signs, e.g.&nbsp;$\alpha+\beta$ renders <span class="math inline">\(\alpha + \beta\)</span>. You can use the display style with double dollar signs:</p>
-<pre><code>$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$</code></pre>
-<p><span class="math display">\[
-\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i
-\]</span></p>
-<p>Limitations:</p>
-<ol type="1">
-<li><p>The source code of a LaTeX math expression must be in one line, unless it is inside a pair of double dollar signs, in which case the starting <code>$$</code> must appear in the very beginning of a line, followed immediately by a non-space character, and the ending <code>$$</code> must be at the end of a line, led by a non-space character;</p></li>
-<li><p>There should not be spaces after the opening <code>$</code> or before the closing <code>$</code>.</p></li>
-</ol>
-</section></section>
-<section>
-<section id="wrap-up" class="title-slide slide level1 center">
-<h1>Wrap up</h1>
-=======
 <img data-src="images/nh_heatmap.png" class="r-stretch quarto-figure-center"></section>
 <section id="heatmap-sh" class="slide level2">
 <h2>Heatmap (SH)</h2>
->>>>>>> Stashed changes
 
 <img data-src="images/sh_heatmap.png" class="r-stretch quarto-figure-center"></section>
-<section id="ggmap" class="slide level2">
-<h2>ggmap</h2>
+<section id="world-map-1880" class="slide level2">
+<h2>World Map (1880)</h2>
 
-<img data-src="images/ggmap.png" class="r-stretch quarto-figure-center"></section>
-<section id="ggmap_1880" class="slide level2">
-<h2>ggmap_1880</h2>
+<img data-src="images/worldmap_1880.png" class="r-stretch quarto-figure-center"></section>
+<section id="world-map-1951" class="slide level2">
+<h2>World Map (1951)</h2>
 
-<img data-src="images/ggmap_1880.png" class="r-stretch quarto-figure-center"></section>
-<section id="ggmap_1951" class="slide level2">
-<h2>ggmap_1951</h2>
+<img data-src="images/worldmap_1951.png" class="r-stretch quarto-figure-center"></section>
+<section id="world-map-2022" class="slide level2">
+<h2>World Map (2022)</h2>
 
-<img data-src="images/ggmap_1951.png" class="r-stretch quarto-figure-center"></section>
-<section id="ggmap_2022" class="slide level2">
-<h2>ggmap_2022</h2>
-
-<img data-src="images/ggmap_2022.png" class="r-stretch quarto-figure-center"></section></section>
+<img data-src="images/worldmap_2022.png" class="r-stretch quarto-figure-center"></section></section>
 <section id="thank-you" class="title-slide slide level1 center">
 <h1>Thank You!</h1>
 
-<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
-<<<<<<< Updated upstream
-</div>
-</section></section>
-
-=======
 </section>
->>>>>>> Stashed changes
     </div>
   </div>
 
@@ -524,6 +431,7 @@ The Graph Crafters
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
+'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -822,9 +730,10 @@ The Graph Crafters
         // clear code selection
         e.clearSelection();
       });
-      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      function tippyHover(el, contentFn) {
         const config = {
           allowHTML: true,
+          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -834,17 +743,8 @@ The Graph Crafters
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start',
+          placement: 'bottom-start'
         };
-        if (contentFn) {
-          config.content = contentFn;
-        }
-        if (onTriggerFn) {
-          config.onTrigger = onTriggerFn;
-        }
-        if (onUntriggerFn) {
-          config.onUntrigger = onUntriggerFn;
-        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 

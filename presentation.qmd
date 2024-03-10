@@ -30,11 +30,11 @@ pacman::p_load(tidymodels,
 
 ## Abstract
 
--   This project utilizes R programming and libraries such as tidyverse, ggplot2, and ggmap to analyze NASA datasets on global surface temperature anomalies.
+-   This project utilizes R programming and libraries such as tidyverse and ggplot2 to analyze NASA datasets on global surface temperature anomalies.
 
--   It explores temperature trends across regions and seasons, encompassing global, Northern Hemisphere, Southern Hemisphere, and zonal anomalies.
+-   It explores temperature trends across regions and seasons, encompassing global, Northern Hemisphere, Southern Hemisphere, and zonal anomalies through preprocessing and visualization techniques including boxplots, heatmaps, and geographical maps, the project identifies trends and patterns in temperature anomalies.
 
--   Through preprocessing and visualization techniques including boxplots, heatmaps, and geographical maps, the project identifies trends and patterns in temperature anomalies.
+## Abstract
 
 -   By comparing hemispheres, examining seasonal variations, and assessing standard deviations across latitudinal zones, the analysis enhances understanding of climate change impacts on global temperatures.
 
@@ -55,11 +55,17 @@ sh_temps_desc <- read.csv("data/sh_temps_desc.csv")
 zonann_temps_desc <- read.csv("data/zonann_temps_desc.csv")
 ```
 
-# Here we go...!!!
+# Analysis of Zonal Temperature Anomalies
 
-## Lineplot
+## Time Series Analysis - Line Graph
 
 ![](images/lineplot_timeseries){fig-align="center"}
+
+## World Map
+
+![](images/worldmap){fig-align="center"}
+
+# Analysis of Seasonal Temperature anomalies
 
 ## Boxplot
 
@@ -73,20 +79,16 @@ zonann_temps_desc <- read.csv("data/zonann_temps_desc.csv")
 
 ![](images/sh_heatmap){fig-align="center"}
 
-## ggmap
+## World Map (1880)
 
-![](images/ggmap){fig-align="center"}
+![](images/worldmap_1880){fig-align="center"}
 
-## ggmap_1880
+## World Map (1951)
 
-![](images/ggmap_1880){fig-align="center"}
+![](images/worldmap_1951){fig-align="center"}
 
-## ggmap_1951
+## World Map (2022)
 
-![](images/ggmap_1951){fig-align="center"}
-
-## ggmap_2022
-
-![](images/ggmap_2022){fig-align="center"}
+![](images/worldmap_2022){fig-align="center"}
 
 # Thank You!
