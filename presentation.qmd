@@ -73,7 +73,7 @@ zonann_temps_desc <- read.csv("data/zonann_temps_desc.csv")
 
 ## Heatmap
 
-![](images/heatmap){fig-align="center"}
+![](images/heatmap.jpg){fig-align="center"}
 
 ## World Map (1880)
 

@@ -10,11 +10,11 @@ editor: visual
 
 This project is analysis of NASA datasets on global surface temperature anomalies. It explores temperature trends across regions and seasons, encompassing global, Northern Hemisphere, Southern Hemisphere, and zonal anomalies.
 
-This analysis will enhance understanding of climate change impacts on global temperatures. And the project's visualizations will contribute valuable insights to the discourse on climate change, aiding researchers, policymakers, and the public in addressing environmental challenges. 
+This analysis will enhance understanding of climate change impacts on global temperatures. And the project's visualizations will contribute valuable insights to the discourse on climate change, aiding researchers, policymakers, and the public in addressing environmental challenges.
 
 ## Introduction
 
-The data comes from the NASA GISS Surface Temperature Analysis (GISTEMP v4). These datasets are tables of global and hemispheric monthly means and zonal annual means. They combine   land-surface,   air   and   sea-surface   water   temperature   anomalies   (Land-Ocean Temperature Index, L-OTI). The values in the tables are deviations from the corresponding 1951-1980 means.
+The data comes from the NASA GISS Surface Temperature Analysis (GISTEMP v4). These datasets are tables of global and hemispheric monthly means and zonal annual means. They combine land-surface, air and sea-surface water temperature anomalies (Land-Ocean Temperature Index, L-OTI). The values in the tables are deviations from the corresponding 1951-1980 means.
 
 This project utilizes R programming and libraries such as tidyverse, ggplot2, and ggmap for preprocessing and to make visualizations including boxplots, heatmaps, and geographical maps, ultimately identifying trends and patterns in temperature anomalies.
 
@@ -67,7 +67,6 @@ nh_temps <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/t
 sh_temps <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-07-11/sh_temps.csv')
 zonann_temps <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-07-11/zonann_temps.csv')
 ```
-
 
 ```{r}
 #| label: data-cleaning-and-transformation
@@ -143,7 +142,7 @@ comprehensive_df <- comprehensive_df %>%
 
 ## Analysis of Zonal Temperature Anomalies
 
-In this section we will be observing the trends in the mean annual temperature anomalies of each of the latitudinal zones of earth – EQ-24N, 24N-44N, 44N-66N, 66N-90N & similarly EQ-24S, 24S-44S, 44S-66S, 66S-90S over the years 1880-2020. For this we have used the zonnan_temps.csv dataset to produce visualizations which depict the anomalies. 
+In this section we will be observing the trends in the mean annual temperature anomalies of each of the latitudinal zones of earth – EQ-24N, 24N-44N, 44N-66N, 66N-90N & similarly EQ-24S, 24S-44S, 44S-66S, 66S-90S over the years 1880-2020. For this we have used the zonnan_temps.csv dataset to produce visualizations which depict the anomalies.
 
 ### Time Series Analysis - Line Graph
 
@@ -329,13 +328,13 @@ gg <- ggplot() +
 print(gg)
 ```
 
-The color gradient from blue to red indicates the range of standard deviation, with blue being low and red being high. The noticeable shift towards warmer colors in some areas, especially near the poles, suggests a significant increase in temperature anomalies, indicative of a warming trend. 
+The color gradient from blue to red indicates the range of standard deviation, with blue being low and red being high. The noticeable shift towards warmer colors in some areas, especially near the poles, suggests a significant increase in temperature anomalies, indicative of a warming trend.
 
 This visualization aids in understanding the impacts of climate change on different regions of the Earth, providing insights into potential shifts in regional climate patterns and their subsequent effects on ecosystems and human livelihoods.
 
 ## Analysis of Seasonal Temperature anomalies
 
-In this section, we would be examining the variations in temperature anomalies across different seasons and compare the same between northern and southern hemispheres. Further  these variations would also be visualized over the years, giving more detailed information.  For this, we used the nh_temps.csv and sh_temps.csv datasets to produce visualizations  which depict the anomalies.
+In this section, we would be examining the variations in temperature anomalies across different seasons and compare the same between northern and southern hemispheres. Further these variations would also be visualized over the years, giving more detailed information. For this, we used the nh_temps.csv and sh_temps.csv datasets to produce visualizations which depict the anomalies.
 
 ### Boxplot
 
@@ -357,7 +356,7 @@ ggplot(comprehensive_df, aes(x = Season, y = Average_Temperature_Anomaly, fill =
   scale_fill_manual(values = c("#648FFF", "#FE6100"))
 ```
 
-From the graph, we can observe that both the Northern Hemisphere (NH) and Southern Hemisphere (SH) experience similar patterns of temperature anomalies across different seasons, with slight variations in magnitude. This suggests that the impacts of climate change are global, affecting both hemispheres and all seasons, albeit to varying degrees. 
+From the graph, we can observe that both the Northern Hemisphere (NH) and Southern Hemisphere (SH) experience similar patterns of temperature anomalies across different seasons, with slight variations in magnitude. This suggests that the impacts of climate change are global, affecting both hemispheres and all seasons, albeit to varying degrees.
 
 The graph also allows us to compare the temperature anomalies of different seasons within each hemisphere. For instance, we can see if winters are becoming warmer or summers are becoming hotter over time. This could provide insights into the shifting patterns of seasons and their potential effects on human livelihoods. For example, warmer winters could affect the hibernation patterns of animals, while hotter summers could lead to more frequent and severe heatwaves, impacting human health and agriculture.
 
@@ -391,13 +390,13 @@ combined_heatmap <- ggplot(comprehensive_df %>% filter(!is.na(Average_Temperatur
 combined_heatmap
 ```
 
-The y-axis for each of the graphs is the four seasons – Fall, Spring, Summer, Winter. The x-axis being the years 1880-2020. The color gradient from blue to red indicates the range of temperature anomalies, with blue being below their mean (-ve anomalies) and red being above their mean (+ve anomalies). 
+The y-axis for each of the graphs is the four seasons – Fall, Spring, Summer, Winter. The x-axis being the years 1880-2020. The color gradient from blue to red indicates the range of temperature anomalies, with blue being below their mean (-ve anomalies) and red being above their mean (+ve anomalies).
 
 From the maps we can observe that warmer colors have significantly started to appear in the northern hemisphere from the 1920’s itself whereas in southern hemisphere the reds started to appear from the 1960’s showing that the northern hemisphere started getting warmer way earlier. Which makes sense considering industrialization first began in the northern hemisphere itself.
 
 ### World Maps
 
-Here, we have extended our analysis by using geom polygons to overlap Seasonal temperature anomalies over the world map, used facet wrap to combine the seasons of a year, and repeated this for three specific years namely 1880, 1951, 2022. In each of the graph, we  have four seasons, in each season we have a world map with latitudinal zones marked and the color gradient through the zones depict how the temperature anomalies have varied through the zones.
+Here, we have extended our analysis by using geom polygons to overlap Seasonal temperature anomalies over the world map, used facet wrap to combine the seasons of a year, and repeated this for three specific years namely 1880, 1951, 2022. In each of the graph, we have four seasons, in each season we have a world map with latitudinal zones marked and the color gradient through the zones depict how the temperature anomalies have varied through the zones.
 
 ```{r, warning=FALSE}
 #| label: worldmap-seasonal
@@ -541,11 +540,11 @@ print(plot_2022)
 
 ```
 
-In the first graph, “Temperature Anomaly 1880”, we can observe that the color gradient only  depicts either zero or negative temperature anomalies. Which means the temperatures have  either been their mean value or have gone below it but never exceeded. All in all, we can say it did not get warmer in 1880. Also, the summers of northern hemisphere have been warmer,  and the winters have been colder than southern hemisphere.
+In the first graph, “Temperature Anomaly 1880”, we can observe that the color gradient only depicts either zero or negative temperature anomalies. Which means the temperatures have either been their mean value or have gone below it but never exceeded. All in all, we can say it did not get warmer in 1880. Also, the summers of northern hemisphere have been warmer, and the winters have been colder than southern hemisphere.
 
-In the second graph, “Temperature Anomaly 1951”, we can observe that the color gradient  depicts zero, negative and positive temperature anomalies. Which means the temperatures  have been both above and below their mean value. Overall, the northern hemisphere has  warmer colors which means the temperatures have risen above their mean (it got warmer)  here, and the southern hemisphere has solid colors which means temperatures have fallen  below their mean (it got colder) here.
+In the second graph, “Temperature Anomaly 1951”, we can observe that the color gradient depicts zero, negative and positive temperature anomalies. Which means the temperatures have been both above and below their mean value. Overall, the northern hemisphere has warmer colors which means the temperatures have risen above their mean (it got warmer) here, and the southern hemisphere has solid colors which means temperatures have fallen below their mean (it got colder) here.
 
-In the third graph, “Temperature Anomaly 2022”, we can observe that the color gradient only  depicts either zero or positive temperature anomalies. Which means the temperatures have  either been their mean value or have gone above it but never decreased. All in all, we can say it only got warmer in 2022. Also, all the seasons of northern hemisphere have been warmer  than the southern hemisphere.
+In the third graph, “Temperature Anomaly 2022”, we can observe that the color gradient only depicts either zero or positive temperature anomalies. Which means the temperatures have either been their mean value or have gone above it but never decreased. All in all, we can say it only got warmer in 2022. Also, all the seasons of northern hemisphere have been warmer than the southern hemisphere.
 
 ## Conclusion
 
