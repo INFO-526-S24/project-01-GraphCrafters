@@ -233,35 +233,23 @@ ggplot(comprehensive_df, aes(x = Season, y = Average_Temperature_Anomaly, fill =
 library(ggplot2)
 # Determine the overall range of temperature anomalies
 overall_range <- range(comprehensive_df$Average_Temperature_Anomaly, na.rm = TRUE)
-# For NH temperatures
-nh_heatmap <- comprehensive_df %>%
-  filter(Hemisphere == "NH", !is.na(Average_Temperature_Anomaly)) %>%
-  ggplot(aes(x = Season, y = Year, fill = Average_Temperature_Anomaly)) +
+
+# Combine NH and SH heatmaps into one plot
+combined_heatmap <- ggplot(comprehensive_df %>% filter(!is.na(Average_Temperature_Anomaly)), 
+                           aes(x = Season, y = Year, fill = Average_Temperature_Anomaly)) +
   geom_tile(color = "white") +
   scale_fill_gradient2(low = "#648FFF", mid = "white", high = "#FE6100", midpoint = 0, limits = overall_range) +
-  labs(title = "Temperature Anomalies in Northern Hemisphere over the years",
+  labs(title = "Temperature Anomalies in Northern and Southern Hemispheres over the years",
        x = "Season",
        y = "Year",
        fill = "Temperature Anomaly",
-       caption = "Source:- TidyTuesday(2023), Global Surface Temperature") +
+       caption = "Source: TidyTuesday(2023), Global Surface Temperature") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-# For SH temperatures
-sh_heatmap <- comprehensive_df %>%
-  filter(Hemisphere == "SH", !is.na(Average_Temperature_Anomaly)) %>%
-  ggplot(aes(x = Season, y = Year, fill = Average_Temperature_Anomaly)) +
-  geom_tile(color = "white") +
-  scale_fill_gradient2(low = "#648FFF", mid = "white", high = "#FE6100", midpoint = 0, limits = overall_range) +
-  labs(title = "Temperature Anomalies in Southern Hemisphere over the years",
-       x = "Season",
-       y = "Year",
-       fill = "Temperature Anomaly",
-       caption = "Source:- TidyTuesday(2023), Global Surface Temperature") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-# Displaying the heatmaps without Annual and without NA values
-nh_heatmap
-sh_heatmap
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  facet_wrap(~ Hemisphere, ncol = 2)
+
+# Display the combined heatmap
+combined_heatmap
 
 ```
 
