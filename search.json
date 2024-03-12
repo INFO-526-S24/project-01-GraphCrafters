@@ -109,7 +109,7 @@
     "href": "index.html#introduction",
     "title": "Exploring Global Surface Temperature Anomalies",
     "section": "Introduction",
-    "text": "Introduction\nThe data comes from the NASA GISS Surface Temperature Analysis (GISTEMP v4). These datasets are tables of global and hemispheric monthly means and zonal annual means. They combine land-surface, air and sea-surface water temperature anomalies (Land-Ocean Temperature Index, L-OTI). The values in the tables are deviations from the corresponding 1951-1980 means.\nThis project utilizes R programming and libraries such as tidyverse, ggplot2, and ggmap for preprocessing and to make visualizations including boxplots, heatmaps, and geographical maps, ultimately identifying trends and patterns in temperature anomalies.\n\n\n\nThe downloaded binary packages are in\n    /var/folders/n3/jhw9z8757c53pxf50v6qm8hw0000gn/T//RtmpdJfqY2/downloaded_packages\n\nThe downloaded binary packages are in\n    /var/folders/n3/jhw9z8757c53pxf50v6qm8hw0000gn/T//RtmpdJfqY2/downloaded_packages"
+    "text": "Introduction\nThe data comes from the NASA GISS Surface Temperature Analysis (GISTEMP v4). These datasets are tables of global and hemispheric monthly means and zonal annual means. They combine land-surface, air and sea-surface water temperature anomalies (Land-Ocean Temperature Index, L-OTI). The values in the tables are deviations from the corresponding 1951-1980 means.\nThis project utilizes R programming and libraries such as tidyverse, ggplot2, and ggmap for preprocessing and to make visualizations including boxplots, heatmaps, and geographical maps, ultimately identifying trends and patterns in temperature anomalies."
   },
   {
     "objectID": "index.html#analysis-of-zonal-temperature-anomalies",
